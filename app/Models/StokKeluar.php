@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class StokKeluar extends Model
 {
@@ -14,4 +15,8 @@ class StokKeluar extends Model
         'jumlah',
         'keterangan',
     ];
+
+    public function produk(): BelongsTo {
+        return $this->belongsTo(Produk::class);
+    }
 }

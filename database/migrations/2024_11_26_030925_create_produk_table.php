@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('kategori_id')->constrained(
                 table: 'kategori_produk',
                 indexName: 'produk_kategori_id_foreign'
-            );
+            )->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('satuan_id')->constrained(
                 table: 'satuan_produk',
                 indexName: 'produk_satuan_produk_id_foreign'

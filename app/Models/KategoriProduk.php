@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class KategoriProduk extends Model
 {
@@ -11,4 +12,8 @@ class KategoriProduk extends Model
     protected $fillable = [
         'kategori',
     ];
+
+    public function produk(): HasMany {
+        return $this->hasMany(Produk::class, 'kategori_id');
+    }
 }
