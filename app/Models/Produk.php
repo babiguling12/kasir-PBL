@@ -5,16 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Produk extends Model
 {
+    use HasFactory;
+    
     protected $table = 'produk';
     protected $primaryKey = ['id', 'barcode'];
     protected $fillable = [
         'barcode',
         'nama_produk',
-        'kategori',
-        'satuan_produk',
+        'kategori_id',
+        'satuan_id',
         'harga',
         'stok',
         'terjual',
@@ -39,4 +42,5 @@ class Produk extends Model
     public function stok_masuk(): HasMany {
         return $this->hasMany(StokMasuk::class, 'barcode');
     }
+    
 }

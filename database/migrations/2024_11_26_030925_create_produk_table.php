@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('produk', function (Blueprint $table) {
             $table->id();
-            $table->string('barcode')->unique()->primaryKey();
+            $table->string('barcode')->unique();
             $table->string('nama_produk');
             $table->foreignId('kategori_id')->constrained(
                 table: 'kategori_produk',
