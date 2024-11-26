@@ -10,7 +10,7 @@
 ## About Team
 
 - Manager Project : Eddy Indrayana
-- Player 1 : Gustu [@sudarma.putraaa](https://www.instagram.com/sudarma.putraaa/)
+- Player 1 : King [@sudarma.putraaa](https://www.instagram.com/sudarma.putraaa/)
 - Player 2 : Adi [@praditya400](https://www.instagram.com/praditya400/)
 - Player 3 : Dea [@deamhrnii__](https://www.instagram.com/deamhrnii__/)
 - Player 4 : Dwik [@dwiksu](https://www.instagram.com/dwiksu/)
