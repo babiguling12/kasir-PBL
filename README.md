@@ -7,6 +7,14 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## About Team
+
+- Manager Project : Eddy Indrayana
+- Player 1 : Gustu [@sudarma.putraaa](https://www.instagram.com/sudarma.putraaa/)
+- Player 2 : Adi [@praditya400](https://www.instagram.com/praditya400/)
+- Player 3 : Dea [@deamhrnii__](https://www.instagram.com/deamhrnii__/)
+- Player 4 : Dwik [@dwiksu](https://www.instagram.com/dwiksu/)
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
