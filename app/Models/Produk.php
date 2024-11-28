@@ -20,7 +20,9 @@ class Produk extends Model
         'harga',
         'stok',
         'terjual',
+        'foto',
     ];
+    
 
     public function transaksi_detail(): HasMany {
         return $this->hasMany(TransaksiDetail::class, 'barcode_id');

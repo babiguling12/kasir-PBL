@@ -20,7 +20,8 @@ class PenggunaFactory extends Factory
             'username' => fake()->unique()->username(),
             'nama' => fake()->name(),
             'password' => fake()->password(),
-            'role' => fake()->randomElement(['admin', 'kasir', 'owner']),
+            'role' => fake()->randomElement([ 'kasir']),
+            'foto' => fake()->imageUrl(),
         ];
     }
 }

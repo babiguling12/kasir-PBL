@@ -19,9 +19,9 @@ class TransaksiFactory extends Factory
     {
         return [
             'tanggal' => fake()->date(),
-            'total_bayar' => fake()->randomFloat(2, 100, 1000),
-            'jumlah_uang' => fake()->randomFloat(2, 100, 1000),
-            'diskon' => fake()->randomFloat(2, 100, 1000),
+            'total_bayar' => fake()->randomFloat(2, 1000, 1000000),
+            'jumlah_uang' => fake()->randomFloat(2, 1000, 1000000),
+            'diskon' => fake()->randomFloat(2, 1000, 1000000),
             'nota' => fake()->sentence(3),
             'kasir_id' => Pengguna::factory(),
         ];

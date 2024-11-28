@@ -13,6 +13,22 @@ class PenggunaSeeder extends Seeder
      */
     public function run(): void
     {
-        Pengguna::factory(10)->create();
+        Pengguna::create([
+            'username' => 'admin',
+            'nama' => 'Admin',
+            'password' => bcrypt('admin'),
+            'role' => 'admin',
+            'foto' => 'admin.jpg',
+        ]);
+
+        Pengguna::create([
+            'username' => 'owner',
+            'nama' => 'Owner',
+            'password' => bcrypt('owner'),
+            'role' => 'owner',
+            'foto' => 'owner.jpg',
+        ]);
+
+        Pengguna::factory(5)->create();
     }
 }

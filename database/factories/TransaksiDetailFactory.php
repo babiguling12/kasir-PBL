@@ -21,7 +21,7 @@ class TransaksiDetailFactory extends Factory
         return [
             'transaksi_id' => Transaksi::factory(),
             'qty' => fake()->randomDigitNotNull(),
-            'total_harga_barang' => fake()->randomFloat(2, 100, 1000),
+            'total_harga_barang' => fake()->randomFloat(2, 1000, 1000000),
             'barcode_id' => Produk::factory(),
         ];
     }

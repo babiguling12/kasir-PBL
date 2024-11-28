@@ -19,13 +19,14 @@ class ProdukFactory extends Factory
     public function definition(): array
     {
         return [
-            'barcode' => fake()->unique()->ean8(),
+            'barcode' => fake()->unique()->ean13(),
             'nama_produk' => fake()->word(),
             'kategori_id' => KategoriProduk::factory(),
             'satuan_id' => SatuanProduk::factory(),
-            'harga' => fake()->randomFloat(2, 10, 1000),
+            'harga' => fake()->randomFloat(2, 1000, 100000),
             'stok' => fake()->randomNumber(3, false),
             'terjual' => fake()->randomNumber(3, false),
+            'foto' => fake()->imageUrl(),
         ];
     }
 }
