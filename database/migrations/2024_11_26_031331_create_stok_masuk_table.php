@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('stok_masuk', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->string('barcode');
-            $table->foreign('barcode')->on('produk')->references('barcode')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('barcode_id')->constrained(
+                table: 'produk',
+                indexName: 'stok_masuk_barcode_id_foreign'
+            )->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('supplier_id')->constrained(
                 table: 'supplier',
                 indexName: 'stok_masuk_supplier_id_foreign'

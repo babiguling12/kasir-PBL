@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('stok_keluar', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->string('barcode');
-            $table->foreign('barcode')->on('produk')->references('barcode')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('barcode_id')->constrained(
+                table: 'produk',
+                indexName: 'stok_keluar_barcode_id_foreign'
+            )->onDelete('cascade')->onUpdate('cascade');
             $table->integer('jumlah');
             $table->string('keterangan')->nullable();
             $table->timestamps();

@@ -18,7 +18,7 @@ class Transaksi extends Model
         'jumlah_uang',
         'diskon',
         'nota',
-        'kasir',
+        'kasir_id',
     ];
 
     public function kasir(): BelongsTo {

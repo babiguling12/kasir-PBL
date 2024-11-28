@@ -20,7 +20,7 @@ class StokMasukFactory extends Factory
     {
         return [
             'tanggal' => fake()->date(),
-            'barcode' => Produk::factory(),
+            'barcode_id' => Produk::factory(),
             'supplier_id' => Supplier::factory(),
             'jumlah' => fake()->randomNumber(3, false),
             'keterangan' => fake()->sentence(3),

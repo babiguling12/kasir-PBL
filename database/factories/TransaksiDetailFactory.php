@@ -22,7 +22,7 @@ class TransaksiDetailFactory extends Factory
             'transaksi_id' => Transaksi::factory(),
             'qty' => fake()->randomDigitNotNull(),
             'total_harga_barang' => fake()->randomFloat(2, 100, 1000),
-            'barcode' => Produk::factory(),
+            'barcode_id' => Produk::factory(),
         ];
     }
 }

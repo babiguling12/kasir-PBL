@@ -19,8 +19,10 @@ return new class extends Migration
             )->onDelete('cascade')->onUpdate('cascade');
             $table->integer('qty');
             $table->decimal('total_harga_barang');
-            $table->string('barcode');
-            $table->foreign('barcode')->on('produk')->references('barcode')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('barcode_id')->constrained(
+                table: 'produk',
+                indexName: 'transaksi_detail_barcode_id_foreign'
+            )->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

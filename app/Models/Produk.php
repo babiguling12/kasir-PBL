@@ -12,7 +12,6 @@ class Produk extends Model
     use HasFactory;
     
     protected $table = 'produk';
-    protected $primaryKey = ['id', 'barcode'];
     protected $fillable = [
         'barcode',
         'nama_produk',
@@ -24,7 +23,7 @@ class Produk extends Model
     ];
 
     public function transaksi_detail(): HasMany {
-        return $this->hasMany(TransaksiDetail::class, 'barcode');
+        return $this->hasMany(TransaksiDetail::class, 'barcode_id');
     }
 
     public function satuan(): BelongsTo {
@@ -36,11 +35,11 @@ class Produk extends Model
     }
 
     public function stok_keluar(): HasMany {
-        return $this->hasMany(StokKeluar::class, 'barcode');
+        return $this->hasMany(StokKeluar::class, 'barcode_id');
     }
 
     public function stok_masuk(): HasMany {
-        return $this->hasMany(StokMasuk::class, 'barcode');
+        return $this->hasMany(StokMasuk::class, 'barcode_id');
     }
     
 }

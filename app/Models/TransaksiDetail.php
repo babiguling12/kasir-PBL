@@ -15,7 +15,7 @@ class TransaksiDetail extends Model
         'transaksi_id',
         'qty',
         'total_harga_barang',
-        'barcode',
+        'barcode_id',
     ];
 
     public function transaksi(): BelongsTo {

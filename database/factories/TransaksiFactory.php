@@ -23,7 +23,7 @@ class TransaksiFactory extends Factory
             'jumlah_uang' => fake()->randomFloat(2, 100, 1000),
             'diskon' => fake()->randomFloat(2, 100, 1000),
             'nota' => fake()->sentence(3),
-            'kasir' => Pengguna::factory(),
+            'kasir_id' => Pengguna::factory(),
         ];
     }
 }

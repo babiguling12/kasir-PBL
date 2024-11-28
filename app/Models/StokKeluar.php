@@ -14,7 +14,7 @@ class StokKeluar extends Model
 
     protected $fillable = [
         'tanggal',
-        'barcode',
+        'barcode_id',
         'jumlah',
         'keterangan',
     ];
