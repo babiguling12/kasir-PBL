@@ -19,7 +19,7 @@ class PenggunaFactory extends Factory
         return [
             'username' => fake()->unique()->username(),
             'nama' => fake()->name(),
-            'password' => fake()->password(),
+            'password' => bcrypt(fake()->password()),
             'role' => fake()->randomElement([ 'kasir']),
             'foto' => fake()->imageUrl(),
         ];

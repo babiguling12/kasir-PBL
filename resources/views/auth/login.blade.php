@@ -10,6 +10,13 @@
                 <a href="#" class="flex items-center justify-center mb-12 text-2xl font-semibold text-gray-900 dark:text-white">
                     <img class="w-auto h-auto mr-2" src="img/EDIPOS.png" alt="logo">   
                 </a>
+
+                @if ($errors->has('loginError'))
+                    <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                        {{ $errors->first('loginError') }}
+                    </div>
+                @endif
+                
                 <form class="space-y-4 md:space-y-6" action="{{ route('login') }}" method="POST">
                     @csrf
                     <div>

@@ -20,14 +20,11 @@ class LoginController extends Controller
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // intended() fungsinya security check yang berkorelasi dengan middleware('auth'). 
-            // Jika user belum login di halaman yang diberikan middleware('auth') maka user tidak bisa masuk ke halaman yang diberi intended 
             return redirect()->intended('dashboard');
         }
 
         return back()->withErrors([
-            'username' => 'Invalid username',
-            'password' => 'Invalid password',
-        ]);
+            'loginError' => 'Username or password is incorrect.',
+        ])->withInput();
     }
 }

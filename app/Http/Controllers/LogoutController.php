@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class LogoutController extends Controller
 {
     public function __invoke() {
-        return view('dashboard');
+        auth()->logout();
+
+        return to_route('login');
     }
 }
