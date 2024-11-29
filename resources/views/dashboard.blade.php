@@ -1,4 +1,5 @@
-<x-header>Dashboard</x-header>
+<x-app-layout>
+  <x-slot:title>Dashboard</x-slot:title>
     <div class="antialiased bg-gray-50 dark:bg-gray-900">
         <x-navbar></x-navbar>
     
@@ -56,4 +57,4 @@
           </div>
         </main>
       </div>
-<x-footer></x-footer>
+</x-app-layout>
