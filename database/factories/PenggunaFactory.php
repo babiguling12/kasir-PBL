@@ -16,10 +16,12 @@ class PenggunaFactory extends Factory
      */
     public function definition(): array
     {
+        $username = fake()->unique()->username();
+
         return [
-            'username' => fake()->unique()->username(),
+            'username' => $username,
             'nama' => fake()->name(),
-            'password' => bcrypt(fake()->password()),
+            'password' => bcrypt($username),
             'role' => fake()->randomElement([ 'kasir']),
             'foto' => fake()->imageUrl(),
         ];
