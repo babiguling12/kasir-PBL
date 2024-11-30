@@ -19,7 +19,7 @@
                 </svg>
                 <span class="sr-only">Toggle flow</span>
             </button>
-            <a href="https://flowbite.com" class="flex items-center justify-between mr-4">
+            <a href="/dashboard" class="flex items-center justify-between mr-4">
                 <span class="self-center text-2xl font-extrabold whitespace-nowrap dark:text-white">EDIPOS</span>
             </a>
         </div>
