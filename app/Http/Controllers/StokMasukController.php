@@ -11,7 +11,7 @@ class StokMasukController extends Controller
      */
     public function index()
     {
-        return view('core.stok_masuk');
+        return view('core.stok.stok_masuk');
     }
 
     /**

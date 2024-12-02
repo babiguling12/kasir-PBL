@@ -1,16 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
+
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\SatuanController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StokMasukController;
 use App\Http\Controllers\StokKeluarController;
+use App\Http\Controllers\LoginController;
 
 
 Route::get('/', function() {
@@ -58,6 +60,9 @@ Route::middleware(['auth'])->group(function (){
 
     // stok keluar
     Route::get('stok-keluar', [StokKeluarController::class, 'index'])->name('page.stokkeluar')->middleware('isKasir');
+
+    // histori
+    Route::get('histori', [LaporanController::class, 'histori'])->name('page.histori');
 
     Route::get('logout', LogoutController::class)->name('logout');
 

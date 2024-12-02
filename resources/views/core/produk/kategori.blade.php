@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot:title>Supplier</x-slot:title>
-
+    
     <!-- Start block -->
 <section class="bg-gray-50 dark:bg-gray-900 antialiased">
     <div class="mx-auto max-w-screen-4xl">

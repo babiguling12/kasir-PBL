@@ -11,7 +11,7 @@ class SatuanController extends Controller
      */
     public function index()
     {
-        return view('core.satuan');
+        return view('core.produk.satuan');
     }
 
     /**

@@ -11,7 +11,7 @@ class StokKeluarController extends Controller
      */
     public function index()
     {
-        return view('core.stok_keluar');
+        return view('core.stok.stok_keluar');
     }
 
     /**
