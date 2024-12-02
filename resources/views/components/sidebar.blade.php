@@ -66,10 +66,10 @@
         <div class="overflow-y-auto py-5 px-3 h-full bg-white dark:bg-gray-800">
             <ul class="space-y-2">
                 <li>
-                    <a href="/dashboard"
-                        class="{{ request()->is('dashboard') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 text-base font-medium  rounded-lg  group">
+                    <a href="{{ route('core.dashboard') }}"
+                        class="{{ request()->is('dashboard/core') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 text-base font-medium  rounded-lg  group">
                         <svg aria-hidden="true"
-                            class="{{ request()->is('dashboard') ? 'text-white' : 'text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white' }} w-6 h-6  "
+                            class="{{ request()->is('dashboard/core') ? 'text-white' : 'text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white' }} w-6 h-6  "
                             fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                             <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/supplier"
+                    <a href="{{ route('page.supplier') }}"
                         class="{{ request()->is('supplier') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 text-base font-medium  rounded-lg  group">
                         <svg aria-hidden="true"
                             class="{{ request()->is('supplier') ? 'text-white' : 'text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white' }} w-6 h-6  "
@@ -110,15 +110,15 @@
                     </button>
                     <ul id="dropdown-produk" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="/kategori"
+                            <a href="{{ route('page.kategori') }}"
                                 class="{{ request()->is('kategori') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 pl-11 text-base font-medium  rounded-lg  group">Kategori</a>
                         </li>
                         <li>
-                            <a href="/satuan"
+                            <a href="{{ route('page.satuan') }}"
                                 class="{{ request()->is('satuan') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 pl-11 text-base font-medium  rounded-lg  group">Satuan</a>
                         </li>
                         <li>
-                            <a href="/produk"
+                            <a href="{{ route('page.produk') }}"
                                 class="{{ request()->is('produk') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 pl-11 text-base font-medium  rounded-lg  group">Semua
                                 Produk</a>
                         </li>
@@ -144,28 +144,16 @@
                     </button>
                     <ul id="dropdown-stok" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="/stok-masuk"
+                            <a href="{{ route('page.stokmasuk') }}"
                                 class="{{ request()->is('stok-masuk') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 pl-11 text-base font-medium  rounded-lg  group">Stok
                                 Masuk</a>
                         </li>
                         <li>
-                            <a href="/stok-keluar"
+                            <a href="{{ route('page.stokkeluar') }}"
                                 class="{{ request()->is('stok-keluar') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 pl-11 text-base font-medium  rounded-lg  group">Stok
                                 Keluar</a>
                         </li>
                     </ul>
-                </li>
-                <li>
-                    <a href="/transaksi"
-                        class="{{ request()->is('transaksi') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 text-base font-medium  rounded-lg  group">
-                        <svg aria-hidden="true"
-                            class="{{ request()->is('transaksi') ? 'text-white' : 'text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white' }} w-6 h-6  "
-                            fill="currentColor" viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M280-640q-33 0-56.5-23.5T200-720v-80q0-33 23.5-56.5T280-880h400q33 0 56.5 23.5T760-800v80q0 33-23.5 56.5T680-640H280Zm0-80h400v-80H280v80ZM160-80q-33 0-56.5-23.5T80-160v-40h800v40q0 33-23.5 56.5T800-80H160ZM80-240l139-313q10-22 30-34.5t43-12.5h376q23 0 43 12.5t30 34.5l139 313H80Zm260-80h40q8 0 14-6t6-14q0-8-6-14t-14-6h-40q-8 0-14 6t-6 14q0 8 6 14t14 6Zm0-80h40q8 0 14-6t6-14q0-8-6-14t-14-6h-40q-8 0-14 6t-6 14q0 8 6 14t14 6Zm0-80h40q8 0 14-6t6-14q0-8-6-14t-14-6h-40q-8 0-14 6t-6 14q0 8 6 14t14 6Zm120 160h40q8 0 14-6t6-14q0-8-6-14t-14-6h-40q-8 0-14 6t-6 14q0 8 6 14t14 6Zm0-80h40q8 0 14-6t6-14q0-8-6-14t-14-6h-40q-8 0-14 6t-6 14q0 8 6 14t14 6Zm0-80h40q8 0 14-6t6-14q0-8-6-14t-14-6h-40q-8 0-14 6t-6 14q0 8 6 14t14 6Zm120 160h40q8 0 14-6t6-14q0-8-6-14t-14-6h-40q-8 0-14 6t-6 14q0 8 6 14t14 6Zm0-80h40q8 0 14-6t6-14q0-8-6-14t-14-6h-40q-8 0-14 6t-6 14q0 8 6 14t14 6Zm0-80h40q8 0 14-6t6-14q0-8-6-14t-14-6h-40q-8 0-14 6t-6 14q0 8 6 14t14 6Z" />
-                        </svg>
-                        <span class="ml-3">Transaksi</span>
-                    </a>
                 </li>
                 <li>
                     <button type="button"
@@ -199,7 +187,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="/pengguna"
+                    <a href="{{ route('page.pengguna') }}"
                         class="{{ request()->is('pengguna') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 text-base font-medium  rounded-lg  group">
                         <svg aria-hidden="true"
                             class="{{ request()->is('pengguna') ? 'text-white' : 'text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white' }} w-6 h-6  "
