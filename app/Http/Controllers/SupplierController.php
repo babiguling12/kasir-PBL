@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -11,7 +12,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        return view('core.supplier');
+        return view('core.supplier', ['suppliers' => Supplier::latest()->paginate(5)]);
     }
 
     /**

@@ -13,6 +13,6 @@ class KategoriProdukSeeder extends Seeder
      */
     public function run(): void
     {
-        KategoriProduk::factory(5)->create();
+        KategoriProduk::factory(10)->create();
     }
 }

@@ -17,7 +17,7 @@ class SatuanProdukFactory extends Factory
     public function definition(): array
     {
         return [
-            'satuan' => fake()->word()
+            'nama_satuan' => fake()->word()
         ];
     }
 }

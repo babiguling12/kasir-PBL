@@ -13,6 +13,6 @@ class SatuanProdukSeeder extends Seeder
      */
     public function run(): void
     {
-        SatuanProduk::factory(5)->create();
+        SatuanProduk::factory(10)->create();
     }
 }

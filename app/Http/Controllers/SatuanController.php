@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SatuanProduk;
 use Illuminate\Http\Request;
 
 class SatuanController extends Controller
@@ -11,7 +12,7 @@ class SatuanController extends Controller
      */
     public function index()
     {
-        return view('core.produk.satuan');
+        return view('core.produk.satuan', ['satuan' => SatuanProduk::latest()->paginate(5)]);
     }
 
     /**

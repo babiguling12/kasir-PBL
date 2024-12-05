@@ -23,6 +23,8 @@ class Produk extends Model
         'foto',
     ];
     
+    protected $with = ['satuan', 'kategori'];
+
 
     public function transaksi_detail(): HasMany {
         return $this->hasMany(TransaksiDetail::class, 'barcode_id');

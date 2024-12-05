@@ -12,7 +12,7 @@ class KategoriProduk extends Model
     
     protected $table = 'kategori_produk';
 
-    protected $fillable = ['kategori'];
+    protected $fillable = ['nama_kategori'];
 
     public function produk(): HasMany {
         return $this->hasMany(Produk::class, 'kategori_id');

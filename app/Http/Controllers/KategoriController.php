@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\KategoriProduk;
 
 class KategoriController extends Controller
 {
@@ -11,7 +12,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        return view('core.produk.kategori');
+        return view('core.produk.kategori', ['kategori' => KategoriProduk::latest()->paginate(5)]);
     }
 
     /**
