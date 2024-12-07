@@ -63,6 +63,9 @@ Route::middleware(['auth'])->group(function (){
 
     // histori
     Route::get('histori', [LaporanController::class, 'histori'])->name('page.histori');
+    Route::get('/histori/detail/{id}', [LaporanController::class, 'Detail'])->name('page.transaksi.detail');
+
+
 
     Route::get('logout', LogoutController::class)->name('logout');
 
