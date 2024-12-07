@@ -74,7 +74,7 @@
                     </tr>
                 </tbody>
                 @empty
-                    <p>Detail tidak ditemukan</p>
+                    <p>Detail tidak ditemukan!</p>
                 @endforelse
                 
             </table>
