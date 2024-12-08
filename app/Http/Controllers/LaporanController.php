@@ -14,7 +14,7 @@ class LaporanController extends Controller
      */
     public function histori()
     {
-        return view('core.laporan.histori', ['histori' => Transaksi::latest()->paginate(5)]);
+        return view('core.laporan.histori.all_histori', ['histori' => Transaksi::latest()->paginate(5)]);
     }
 
     /**
@@ -67,19 +67,19 @@ class LaporanController extends Controller
 
     
     public function Detail($id)
-{
-    $transaction = Transaksi::find($id);
-    $histori_detail = TransaksiDetail::where('transaksi_id', $id)->latest()->get();
-    
+    {
+        $transaction = Transaksi::find($id);
+        $histori_detail = TransaksiDetail::where('transaksi_id', $id)->latest()->get();
+        
 
-    if (!$transaction) {
-        return redirect()->route('page.histori')->with('error', 'Transaction not found.');
+        if (!$transaction) {
+            return redirect()->route('page.histori')->with('error', 'Transaction not found.');
+        }
+
+        return view('core.laporan.histori.detail',[
+            'histori' => $transaction,
+            'histori_detail' => $histori_detail
+            ] );
     }
-
-    return view('core.laporan.histori.detail',[
-        'histori' => Transaksi::latest(),
-        'histori_detail' => $histori_detail
-        ] );
-}
 
 }

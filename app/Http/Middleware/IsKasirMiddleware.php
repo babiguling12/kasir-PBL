@@ -14,7 +14,11 @@ class IsKasirMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    {
+    {  
+        
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
 
         if (auth()->user()->role === 'kasir') {
             return redirect()->route('kasir.dashboard');

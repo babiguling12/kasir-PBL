@@ -37,8 +37,8 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function (){
 
     // dashboard
-    Route::get('dashboard/core', [DashboardController::class, 'core'])->name('core.dashboard')->middleware('checkRole');
-    Route::get('dashboard/kasir', [DashboardController::class, 'kasir'])->name('kasir.dashboard')->middleware('checkRole');
+    Route::get('dashboard/core', [DashboardController::class, 'core'])->name('core.dashboard')->middleware('isKasir');
+    Route::get('dashboard/kasir', [DashboardController::class, 'kasir'])->name('kasir.dashboard')->middleware('isCore');
 
     // pengguna
     Route::get('pengguna', [PenggunaController::class, 'index'])->name('page.pengguna')->middleware('isKasir');

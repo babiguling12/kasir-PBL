@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckRoleMiddleware
+class IsCoreMiddleware
 {
     /**
      * Handle an incoming request.
@@ -20,13 +20,7 @@ class CheckRoleMiddleware
             return redirect()->route('login');
         }
 
-        
-        $role = auth()->user()->role;
-
-        // $request->routeIs() untuk mengecek apakah route yang diakses sedang berjalan
-        if ($role === 'kasir' && !$request->routeIs('kasir.dashboard')) {
-            return redirect()->route('kasir.dashboard');
-        } elseif ($role !== 'kasir' && !$request->routeIs('core.dashboard')) {
+        if (auth()->user()->role !== 'kasir') {
             return redirect()->route('core.dashboard');
         }
 
