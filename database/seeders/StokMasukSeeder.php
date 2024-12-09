@@ -15,7 +15,7 @@ class StokMasukSeeder extends Seeder
      */
     public function run(): void
     {
-        StokMasuk::factory(5)->recycle([
+        StokMasuk::factory(100)->recycle([
             Produk::all(),
             Supplier::all(),
         ])->create();

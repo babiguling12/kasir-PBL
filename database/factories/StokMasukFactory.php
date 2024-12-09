@@ -23,7 +23,7 @@ class StokMasukFactory extends Factory
             'barcode_id' => Produk::factory(),
             'supplier_id' => Supplier::factory(),
             'jumlah' => fake()->randomNumber(3, false),
-            'keterangan' => fake()->sentence(3),
+            'keterangan' => fake()->randomElement(['Penambahan', 'Perbaikan']),
         ];
     }
 }

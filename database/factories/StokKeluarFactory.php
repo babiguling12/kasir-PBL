@@ -21,7 +21,7 @@ class StokKeluarFactory extends Factory
             'tanggal' => fake()->date(),
             'barcode_id' => Produk::factory(),
             'jumlah' => fake()->randomNumber(3, false),
-            'keterangan' => fake()->sentence(3),
+            'keterangan' => fake()->randomElement(['Rusak', 'Hilang', 'Kedaluwarsa']),
         ];
     }
 }

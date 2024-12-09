@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StokMasuk;
 use Illuminate\Http\Request;
 
 class StokMasukController extends Controller
@@ -11,7 +12,7 @@ class StokMasukController extends Controller
      */
     public function index()
     {
-        return view('core.stok.stok_masuk');
+        return view('core.stok.stok_masuk', ['stok_masuk' => StokMasuk::latest()->paginate(5)]);
     }
 
     /**

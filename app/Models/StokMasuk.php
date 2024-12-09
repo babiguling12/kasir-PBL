@@ -20,8 +20,10 @@ class StokMasuk extends Model
         'keterangan',
     ];
 
+    protected $with = ['produk', 'supplier'];
+
     public function produk(): BelongsTo {
-        return $this->belongsTo(Produk::class);
+        return $this->belongsTo(Produk::class, 'barcode_id');
     }
 
     public function supplier(): BelongsTo {

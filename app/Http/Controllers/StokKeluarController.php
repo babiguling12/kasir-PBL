@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StokKeluar;
 use Illuminate\Http\Request;
 
 class StokKeluarController extends Controller
@@ -11,7 +12,7 @@ class StokKeluarController extends Controller
      */
     public function index()
     {
-        return view('core.stok.stok_keluar');
+        return view('core.stok.stok_keluar', ['stok_keluar' => StokKeluar::latest()->paginate(5)]);
     }
 
     /**
