@@ -22,7 +22,6 @@ class PenggunaFactory extends Factory
             'username' => $username,
             'nama' => fake()->name(),
             'password' => bcrypt($username),
-            'role' => fake()->randomElement([ 'kasir']),
             'foto' => fake()->imageUrl(),
         ];
     }

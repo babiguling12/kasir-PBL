@@ -17,11 +17,7 @@ use App\Http\Controllers\LoginController;
 
 Route::get('/', function() {
     if(auth()->check()) {
-        if(auth()->user()->role === 'kasir') {
-            return redirect()->route('kasir.dashboard');
-        } else {
-            return redirect()->route('core.dashboard');
-        }
+        return redirect()->route('page.dashboard');
     }
 
     return view('auth.login');
@@ -37,8 +33,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function (){
 
     // dashboard
-    Route::get('dashboard/core', [DashboardController::class, 'core'])->name('core.dashboard')->middleware('isKasir');
-    Route::get('dashboard/kasir', [DashboardController::class, 'kasir'])->name('kasir.dashboard')->middleware('isCore');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('page.dashboard');
 
     // pengguna
     Route::get('pengguna', [PenggunaController::class, 'index'])->name('page.pengguna')->middleware('isKasir');

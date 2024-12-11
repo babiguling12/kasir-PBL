@@ -21,7 +21,7 @@ class IsKasirMiddleware
         }
 
         if (auth()->user()->role === 'kasir') {
-            return redirect()->route('kasir.dashboard');
+            return redirect()->route('page.dashboard');
         }
 
         return $next($request);

@@ -21,7 +21,7 @@ class IsCoreMiddleware
         }
 
         if (auth()->user()->role !== 'kasir') {
-            return redirect()->route('core.dashboard');
+            return redirect()->route('page.dashboard');
         }
 
         return $next($request);
