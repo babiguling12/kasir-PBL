@@ -12,12 +12,12 @@ class DashboardController extends Controller
     public function index() {
         $currentYear = now()->year;
         $lastYear = $currentYear - 1;
-
+        $currentDate = now()->toDateString();
         
         $lastYearSales = Transaksi::getYearlySales($lastYear);
         $thisYearSales = Transaksi::getYearlySales($currentYear);
-        $transaksi = Transaksi::getYearlySales($currentYear)->first();
-        $stokMasuk = StokMasuk::getYearlyStokMasuk($currentYear)->first();
+        $transaksi = Transaksi::getTodaySales($currentDate)->first();
+        $stokMasuk = StokMasuk::getTodayStokMasuk($currentDate)->first();
 
         return view('dashboard',[
             'SalesData' => Produk::all(),

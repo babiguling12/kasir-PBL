@@ -37,5 +37,13 @@ class Transaksi extends Model
             ->get()
             ->keyBy('month'); // Optional: Key the result by month
     }
+
+    public static function getTodaySales($currentDate) {
+        return self::selectRaw('DATE(tanggal) as date, SUM(total_bayar) as total_revenue, COUNT(id) as total_transaksi')
+            ->whereDate('tanggal', $currentDate) 
+            ->groupByRaw('DATE(tanggal)') 
+            ->orderBy('date', 'asc')
+            ->get();
+    }
 }
 

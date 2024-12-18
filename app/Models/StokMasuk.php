@@ -30,12 +30,12 @@ class StokMasuk extends Model
         return $this->belongsTo(Supplier::class);
     }
 
-    public static function getYearlyStokMasuk($year) {
-        return self::selectRaw('YEAR(tanggal) as year, MONTH(tanggal) as month, SUM(jumlah) as total_stokmasuk')
-            ->whereYear('tanggal', $year)
-            ->groupByRaw('YEAR(tanggal), MONTH(tanggal)')
-            ->orderBy('month', 'asc')
-            ->get()
-            ->keyBy('month'); // Optional: Key the result by month
+
+    public static function getTodayStokMasuk($currentDate) {
+        return self::selectRaw('DATE(tanggal) as date, SUM(jumlah) as total_stokmasuk')
+            ->whereDate('tanggal', $currentDate) 
+            ->groupByRaw('DATE(tanggal)') 
+            ->orderBy('date', 'asc')
+            ->get();
     }
 }
