@@ -127,6 +127,8 @@
     </div>
 
     <!-- Pagination -->
-    {{ $suppliers->links() }}
+    <div class="p-5">
+        {{ $suppliers->links() }}
+    </div>
 
 </div>
