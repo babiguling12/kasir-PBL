@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Supplier;
+use Livewire\Attributes\On;
 use Livewire\WithPagination;
 
 class SupplierTable extends Component
@@ -18,6 +19,9 @@ class SupplierTable extends Component
     {
         $this->resetPage();
     }
+
+    #[On('supplier-refresh')]
+    public function refresh() {}
 
     public function render()
     {
