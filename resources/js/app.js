@@ -3,19 +3,35 @@ import 'flowbite';
 import Chart from 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
+//BackgroundColour
+function generateColors(count) {
+    const colors = [];
+    for (let i = 0; i < count; i++) {
+        // Generate random colors
+        const color = `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`;
+        colors.push(color);
+    }
+    return colors;
+}
+
 Chart.register(ChartDataLabels);
 // Diagram Lingkaran: Penjualan Barang
+if(window.SalesData){
+    const dynamicColors = generateColors(window.SalesData.length);
+    const labels = window.SalesData.map(item => item.nama_produk); 
+    const data = window.SalesData.map(item => item.terjual); 
+
 const ctx1 = document.getElementById('BarangLarisChart').getContext('2d');
 const BarangLarisChart = new Chart(ctx1, {
     type: 'pie',
     data: {
         datasets: [{
-            data: [50, 30, 15, 5],
-            backgroundColor: ['#0FADEC', '#E4BF27', '#E81810', '#E4BF27'],
-            borderColor: ['#fff', '#fff', '#fff', '#fff'],
+            data: data,
+            backgroundColor: dynamicColors,
+            borderColor: dynamicColors.map(() => '#fff'),
             borderWidth: 1
         }],
-        labels: ['Produk A', 'Produk B', 'Produk C', 'Produk D']
+        labels: labels
     },
     options: {
         responsive: true,
@@ -35,6 +51,7 @@ const BarangLarisChart = new Chart(ctx1, {
             },
             datalabels: {
                 color: 'white',
+                display: true,
                 font: {
                     weight: 'bold',
                     size: 12
@@ -47,9 +64,15 @@ const BarangLarisChart = new Chart(ctx1, {
             }
         }
     }
-});
+})
+};
 
 // Diagram Garis: Total Penjualan per Bulan
+// if(window.SalesData){
+//     const dynamicColors = generateColors(window.SalesData.length);
+//     const labels = window.SalesData.map(item => item.nama_produk); 
+//     const data = window.SalesData.map(item => item.terjual); 
+
 const ctx2 = document.getElementById('penjualanBulanChart').getContext('2d');
 const penjualanBulanChart = new Chart(ctx2, {
     type: 'line',
@@ -101,4 +124,5 @@ const penjualanBulanChart = new Chart(ctx2, {
             }
         }
     }
-});
+})
+;

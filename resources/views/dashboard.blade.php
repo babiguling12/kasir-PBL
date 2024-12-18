@@ -53,6 +53,10 @@
             </div>
 
             {{-- Diagram --}}
+            <script>
+              window.SalesData = @json($SalesData);
+              window.TotalSales = @json($TotalSales);
+            </script>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-auto p-4">
                 <!-- Diagram Lingkaran: Penjualan Barang -->
                 <div class="bg-white md:col-span-1 p-4 rounded-lg shadow-md">
