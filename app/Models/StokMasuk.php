@@ -29,4 +29,13 @@ class StokMasuk extends Model
     public function supplier(): BelongsTo {
         return $this->belongsTo(Supplier::class);
     }
+
+    public static function getYearlyStokMasuk($year) {
+        return self::selectRaw('YEAR(tanggal) as year, MONTH(tanggal) as month, SUM(jumlah) as total_stokmasuk')
+            ->whereYear('tanggal', $year)
+            ->groupByRaw('YEAR(tanggal), MONTH(tanggal)')
+            ->orderBy('month', 'asc')
+            ->get()
+            ->keyBy('month'); // Optional: Key the result by month
+    }
 }

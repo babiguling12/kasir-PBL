@@ -8,7 +8,7 @@
                 <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
                     style="background-color: #0FADEC;">
                     <div>
-                        <h2 class="text-3xl font-bold">143</h2>
+                        <h2 class="text-3xl font-bold">{{$transaksi->total_transaksi ?? 0}}</h2>
                         <p class="text-sm">Transaksi Hari Ini</p>
                     </div>
                     <div>
@@ -23,7 +23,7 @@
                 <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
                     style="background-color: #E4BF27;">
                     <div>
-                        <h2 class="text-3xl font-bold">Rp 12.045.500</h2>
+                        <h2 class="text-3xl font-bold">Rp {{ number_format($transaksi->total_revenue, 0, ',', '.') }}</h2>
                         <p class="text-sm">Uang Masuk Hari Ini</p>
                     </div>
                     <div>
@@ -38,7 +38,7 @@
                 <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
                     style="background-color: #E81810;">
                     <div>
-                        <h2 class="text-3xl font-bold">143</h2>
+                        <h2 class="text-3xl font-bold">{{ $stokMasuk->total_stokmasuk ?? 0 }}</h2>
                         <p class="text-sm">Stok Masuk Hari Ini</p>
                     </div>
                     <div>
@@ -55,7 +55,10 @@
             {{-- Diagram --}}
             <script>
               window.SalesData = @json($SalesData);
-              window.TotalSales = @json($TotalSales);
+              window.MonthSales = @json([
+                'thisYear' => $thisYearSales,
+                'lastYear' => $lastYearSales
+                ]);
             </script>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-auto p-4">
                 <!-- Diagram Lingkaran: Penjualan Barang -->
@@ -71,7 +74,7 @@
 
                 <!-- Diagram Garis: Total Penjualan per Bulan -->
                 <div class="bg-white md:col-span-2 p-4 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold mb-4">Total Penjualan per Bulan</h2>
+                    <h2 class="text-xl font-semibold mb-4">Total Revenue per Bulan</h2>
                     <div class="w-full h-full">
                         <canvas id="penjualanBulanChart"></canvas>
                     </div>

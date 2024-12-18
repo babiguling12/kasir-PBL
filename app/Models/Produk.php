@@ -46,11 +46,4 @@ class Produk extends Model
         return $this->hasMany(StokMasuk::class, 'barcode_id');
     }
     
-    public static function getMonthlySales($month, $year) {
-            return self::whereMonth('updated_at', $month)
-                ->whereYear('updated_at', $year)
-                ->sum('terjual');
-    
-        
-    }
 }

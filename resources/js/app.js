@@ -68,30 +68,25 @@ const BarangLarisChart = new Chart(ctx1, {
 };
 
 // Diagram Garis: Total Penjualan per Bulan
-// if(window.SalesData){
-//     const dynamicColors = generateColors(window.SalesData.length);
-//     const labels = window.SalesData.map(item => item.nama_produk); 
-//     const data = window.SalesData.map(item => item.terjual); 
-
+if(window.MonthSales){
+    const thisYearData = Object.values(window.MonthSales.thisYear).map(item => parseFloat(item.total_revenue));
+    const lastYearData = Object.values(window.MonthSales.lastYear).map(item => parseFloat(item.total_revenue));
+    
 const ctx2 = document.getElementById('penjualanBulanChart').getContext('2d');
 const penjualanBulanChart = new Chart(ctx2, {
-    type: 'line',
+    type: 'bar',
     data: {
-        labels: Array.from({ length: 30 }, (_, i) => (i + 1).toString()),
+        labels: Array.from({ length: 12 }, (_, i) => (i + 1).toString()),
         datasets: [{
-            label: 'Penjualan Bulan Ini',
-            data: [167, 178, 98, 76, 66, 52, 63, 80, 70, 201, 154, 128, 190, 142, 110, 187, 125, 155, 85, 103, 206, 115, 120, 182, 161, 136, 82, 121, 173, 142]
-            ,
-            fill: false,
+            label: 'Penjualan Tahun Ini',
+            data: thisYearData,
             backgroundColor: '#0FADEC',
             borderColor: '#0FADEC',
             tension: 0.1
         },
         {
-            label: 'Penjualan Bulan Lalu',
-            data: [109, 82, 88, 101, 120, 91, 133, 202, 190, 205, 56, 114, 160, 90, 124, 147, 194, 61, 52, 210, 151, 142, 205, 158, 124, 204, 55, 216, 111, 141]
-            ,
-            fill: false,
+            label: 'Penjualan Tahun Lalu',
+            data:lastYearData,
             backgroundColor: '#E4BF27',
             borderColor: '#E4BF27',
             tension: 0.1
@@ -115,7 +110,12 @@ const penjualanBulanChart = new Chart(ctx2, {
             tooltip: {
                 callbacks: {
                     label: function(tooltipItem) {
-                        return tooltipItem.dataset.label + ': Rp ' + tooltipItem.raw.toLocaleString();
+                        const revenue = tooltipItem.raw.toLocaleString('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR',
+                            minimumFractionDigits: 0
+                        });
+                        return `${tooltipItem.dataset.label}: ${revenue}`;
                     }
                 }
             },
@@ -125,4 +125,4 @@ const penjualanBulanChart = new Chart(ctx2, {
         }
     }
 })
-;
+};

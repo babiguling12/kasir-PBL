@@ -3,16 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produk;
+use App\Models\StokMasuk;
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index() {
-        $currentMonth = now()->month;
         $currentYear = now()->year;
+        $lastYear = $currentYear - 1;
 
-        $totalSales = Produk::getMonthlySales($currentMonth, $currentYear);
+        
+        $lastYearSales = Transaksi::getYearlySales($lastYear);
+        $thisYearSales = Transaksi::getYearlySales($currentYear);
+        $transaksi = Transaksi::getYearlySales($currentYear)->first();
+        $stokMasuk = StokMasuk::getYearlyStokMasuk($currentYear)->first();
 
-        return view('dashboard',['SalesData' => Produk::all(),'TotalSales'=>$totalSales]);
+        return view('dashboard',[
+            'SalesData' => Produk::all(),
+            'thisYearSales'=>$thisYearSales, 
+            'lastYearSales'=>$lastYearSales,
+            'transaksi'=>$transaksi,
+            'stokMasuk'=>$stokMasuk,
+        ]);
     }
 }

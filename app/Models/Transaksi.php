@@ -28,4 +28,14 @@ class Transaksi extends Model
     public function transaksi_detail(): HasMany {
         return $this->hasMany(TransaksiDetail::class);
     }
+
+    public static function getYearlySales($year) {
+        return self::selectRaw('YEAR(tanggal) as year, MONTH(tanggal) as month, SUM(total_bayar) as total_revenue, COUNT(id) as total_transaksi')
+            ->whereYear('tanggal', $year)
+            ->groupByRaw('YEAR(tanggal), MONTH(tanggal)')
+            ->orderBy('month', 'asc')
+            ->get()
+            ->keyBy('month'); // Optional: Key the result by month
+    }
 }
+
