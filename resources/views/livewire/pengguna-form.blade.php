@@ -12,7 +12,7 @@
             </button>
         </div>
         <!-- Modal body -->
-        <form>
+        <form wire:submit="store">
             <div class="grid gap-4 mb-4 mt-sm:grid-cols-2">
                 
                 <div class="sm:col-span-2">

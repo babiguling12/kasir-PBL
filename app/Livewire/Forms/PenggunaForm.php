@@ -4,14 +4,16 @@ namespace App\Livewire\Forms;
 
 use Livewire\Component;
 use App\Models\Pengguna;
+use Livewire\WithFileUploads;
 
 class PenggunaForm extends Component
 {
+    use WithFileUploads;
     
     public $nama;
     public $username;
     public $password;
-    public $foto;
+    public $profile;
 
     public function store() {
         $rules = [
@@ -27,6 +29,6 @@ class PenggunaForm extends Component
     }
     public function render()
     {
-        return view('livewire.forms.pengguna-form');
+        return view('livewire.pengguna-form');
     }
 }

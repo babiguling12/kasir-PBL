@@ -29,6 +29,6 @@ class SupplierModal extends ModalComponent
 
     public function render()
     {
-        return view('livewire.forms.supplier-form');
+        return view('livewire.supplier-form');
     }
 }
