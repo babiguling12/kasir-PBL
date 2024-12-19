@@ -49,8 +49,6 @@ Route::middleware(['auth'])->group(function (){
 
     // kategori
     Route::get('kategori', [KategoriController::class, 'index'])->name('page.kategori')->middleware('isKasir');
-    Route::post('kategori/store', [KategoriController::class, 'store'])->name('store.kategori')->middleware('isKasir');
-    Route::post('kategori/update/{kategoriproduk}', [KategoriController::class, 'update'])->name('update.kategori')->middleware('isKasir');
 
     // stok masuk
     Route::get('stok-masuk', [StokMasukController::class, 'index'])->name('page.stokmasuk')->middleware('isKasir');

@@ -16,5 +16,9 @@ class SatuanProduk extends Model
     public function produk(): HasMany {
         return $this->hasMany(Produk::class, 'satuan_id');
     }
+
+    public static function getDataSatuan($search) {
+        return Self::where('nama_satuan', 'like', '%' . $search . '%')->latest()->paginate(5);
+    }
     
 }
