@@ -24,7 +24,7 @@ class SupplierModal extends ModalComponent
         $this->form->store();
 
         $this->closeModal();
-        $this->dispatch('supplier-refresh');
+        $this->dispatch('refresh');
     }
 
     public function render()

@@ -54,8 +54,8 @@
                     <th scope="col" class="p-4"></th>
                 </tr>
             </thead>
-            @forelse ($suppliers as $supplier)
-                <tbody>
+            <tbody>
+                    @forelse ($suppliers as $supplier)
                     <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <td class="p-4 w-4">
                             <div class="flex items-center">
@@ -93,7 +93,7 @@
                             class="px-4 py-3 font-medium place-items-end text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="flex items-center space-x-4">
                                 @if (auth()->user()->role === 'admin')
-                                    <button type="button" wire:click="$dispatch('openModal', { component: 'supplier-modal', arguments: {supplier: {{ $supplier->id }} }})" aria-controls="drawer-update-product"
+                                    <button type="button" wire:click="$dispatch('openModal', { component: 'supplier-modal', arguments: {id: {{ $supplier->id }} }})" aria-controls="drawer-update-product"
                                         class="tampilModalEdit py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
                                             viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -105,7 +105,7 @@
                                         </svg>
                                         Edit
                                     </button>
-                                    <button type="button" wire:click="$dispatch('openModal', { component: 'supplier-delete', arguments: {supplier: {{ $supplier->id }} }})"
+                                    <button type="button" wire:click="$dispatch('openModal', { component: 'data-delete', arguments: {model: 'Supplier', id: {{ $supplier->id }} }})"
                                         class="flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
                                             viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -119,12 +119,14 @@
                             </div>
                         </td>
                     </tr>
+                    @empty
+                    <tr>
+                        <td class="px-4 pt-5 font-medium text-gray-500 text-center text-xl whitespace-nowrap dark:text-white" colspan="9">
+                            Data Supplier belum ada
+                        </td>
+                    </tr>
+                    @endforelse
                 </tbody>
-            @empty
-            <td class="px-4 pt-5 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Supplier belum ada
-            </td>
-            @endforelse
         </table>
     </div>
 

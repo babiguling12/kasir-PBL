@@ -3,26 +3,31 @@
 namespace App\Livewire;
 
 use App\Models\Supplier;
+use Illuminate\Support\Str;
 use App\Livewire\Forms\SupplierForm;
 use LivewireUI\Modal\ModalComponent;
 
-class SupplierDelete extends ModalComponent
+class DataDelete extends ModalComponent
 {
-    public $supplier;
+    public $model;
 
-    public function mount(Supplier $supplier)
+    public function mount($model, $id)
     {
-        $this->supplier = $supplier;
+        $class = "App\\Models\\" . Str::studly(Str::singular($model));
+        if(class_exists($class)) {
+            $this->model = new $class;
+            $this->model = $this->model->find($id);
+        }
     }
 
     public function destroy()
     {
-        $this->supplier->delete();
+        $this->model->delete();
 
         flash()->success('Data berhasil dihapus');
 
         $this->closeModal();
-        $this->dispatch('supplier-refresh');
+        $this->dispatch('refresh');
     }
 
     public function render()

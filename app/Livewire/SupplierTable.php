@@ -20,17 +20,13 @@ class SupplierTable extends Component
         $this->resetPage();
     }
 
-    #[On('supplier-refresh')]
+    #[On('refresh')]
     public function refresh() {}
 
     public function render()
     {
-        if($this->search == null) {
-            $suppliers = Supplier::latest()->paginate(5);
-        } else {
-            $suppliers = Supplier::where('nama', 'like', '%'.$this->search.'%')->paginate(5);
-        }
-
-        return view('livewire.supplier-table', ['suppliers' => $suppliers]);
+        return view('livewire.supplier-table', [
+            'suppliers' => Supplier::getDataSupplier($this->search)
+        ]);
     }
 }
