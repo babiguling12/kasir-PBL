@@ -21,4 +21,8 @@ class Supplier extends Model
     public function stok_masuk(): HasMany {
         return $this->hasMany(StokMasuk::class);
     }
+
+    public static function getDataSupplier() {
+        return Supplier::latest()->paginate(5);
+    }
 }

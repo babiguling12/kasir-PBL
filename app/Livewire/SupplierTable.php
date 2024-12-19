@@ -25,10 +25,10 @@ class SupplierTable extends Component
 
     public function render()
     {
-        if($this->search == null) {
-            $suppliers = Supplier::latest()->paginate(5);
-        } else {
+        if($this->search != null) {
             $suppliers = Supplier::where('nama', 'like', '%'.$this->search.'%')->paginate(5);
+        } else {
+            $suppliers = Supplier::getDataSupplier();
         }
 
         return view('livewire.supplier-table', ['suppliers' => $suppliers]);

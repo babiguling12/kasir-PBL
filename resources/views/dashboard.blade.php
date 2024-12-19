@@ -23,7 +23,7 @@
                 <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
                     style="background-color: #E4BF27;">
                     <div>
-                        <h2 class="text-3xl font-bold">Rp {{ number_format($transaksi->total_revenue, 0, ',', '.') }}</h2>
+                        <h2 class="text-3xl font-bold">Rp {{ number_format($transaksi->total_revenue ?? 0, 0, ',', '.') }}</h2>
                         <p class="text-sm">Uang Masuk Hari Ini</p>
                     </div>
                     <div>
