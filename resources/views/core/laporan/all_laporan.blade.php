@@ -2,7 +2,7 @@
     <x-slot:title>Laporan Keseluruhan</x-slot:title>
     
     <!-- Start block -->
-    <div class="flex justify-between items-center py-4 px-4 mb-4 rounded-t border sm:mb-5 bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden h-28">
+    <div class="flex justify-between items-center py-4 px-4 mb-4 rounded-t border sm:mb-5 bg-gray-50 dark:bg-gray-900 antialiased relative shadow-md sm:rounded-lg overflow-hidden h-28">
         <div class="flex items-center space-x-4">
             <div class="relative">
                 <label for="start-date" class="sr-only">Select start date</label>
@@ -34,7 +34,7 @@
             </div>
         </div>       
          
-        <button type="button" aria-controls="drawer-update-product" class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+        <button class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 mr-2 -ml-0.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
             </svg>
@@ -49,7 +49,7 @@
         <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
             style="background-color: #0FADEC;">
             <div>
-                <h2 class="text-3xl font-bold"></h2>
+                <h2 class="text-3xl font-bold">{{$transaksi->sum('total_transaksi')}}</h2>
                 <p class="text-sm">Total Transaksi</p>
             </div>
             <div>
@@ -64,7 +64,7 @@
         <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
             style="background-color: #E4BF27;">
             <div>
-                <h2 class="text-3xl font-bold">Rp </h2>
+                <h2 class="text-3xl font-bold">Rp {{ number_format($transaksi->sum('total_revenue'), 0, ',', '.') }}</h2>
                 <p class="text-sm">Total Uang Masuk</p>
             </div>
             <div>
@@ -79,7 +79,7 @@
         <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
             style="background-color: #E81810;">
             <div>
-                <h2 class="text-3xl font-bold"></h2>
+                <h2 class="text-3xl font-bold">{{$stok->sum('total_stokmasuk')}}</h2>
                 <p class="text-sm">Total Stok Masuk</p>
             </div>
             <div>
@@ -94,7 +94,7 @@
         <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
             style="background-color: #E810CB;">
             <div>
-                <h2 class="text-3xl font-bold"></h2>
+                <h2 class="text-3xl font-bold">{{$produk->sum('terjual')}}</h2>
                 <p class="text-sm">Total Produk Terjual</p>
             </div>
             <div>
@@ -110,170 +110,26 @@
     <section class="bg-gray-50 dark:bg-gray-900 antialiased">
         <div class="mx-auto max-w-screen-4xl">
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-                <div class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 border-t dark:border-gray-700">
-                    <div class="w-full md:w-1/2">
-                        <form class="flex items-center">
-                            <label for="search-produk" class="sr-only">Search</label>
-                            <div class="relative w-full">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
-                                    </svg>
-                                </div>
-                                <input type="text" id="search-produk" name="search-produk" placeholder="Search for produk" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-80 pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="p-4">
-                                    <div class="flex items-center">
-                                        <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="checkbox-all" class="sr-only">checkbox</label>
-                                    </div>
-                                </th>
-                                <th scope="col" class="p-4">Produk</th>
-                                <th scope="col" class="p-4">Barcode</th>
-                                <th scope="col" class="p-4">Satuan</th>
-                                <th scope="col" class="p-4">Kategori</th>
-                                <th scope="col" class="p-4">Harga</th>
-                                <th scope="col" class="p-4">Stok</th>
-                                <th scope="col" class="p-4"></th>
-                                <th scope="col" class="p-4"></th>
-                                <th scope="col" class="p-4"></th>
-                            </tr>
-                        </thead>
-                        @forelse ( $products as $produk )
-                        <tbody>
-                            <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <td class="p-4 w-4">
-                                    <div class="flex items-center">
-                                        <input id="checkbox-table-search-1" type="checkbox" onclick="event.stopPropagation()" class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                                    </div>
-                                </td>
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <div class="flex items-center mr-3">
-                                        <img src="{{ $produk->foto }}" alt="{{ $produk->nama_produk }}" class="h-8 w-auto mr-3">
-                                        {{ $produk->nama_produk }}
-                                    </div>
-                                </th>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $produk->barcode }}</td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $produk->satuan->nama_satuan }}</td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $produk->kategori->nama_kategori }}</td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">Rp {{ number_format($produk->harga, 0, ',', '.') }}</td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $produk->stok }}</td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"></td>
-                                <td class="px-4 py-3"></td>
-                                <td class="px-4 py-3 font-medium place-items-end text-gray-900 whitespace-nowrap dark:text-white">
-                                </td>
-                            </tr>
-                        </tbody>
-                        @empty
-                            <p>Produk tidak ditemukan</p>
-                        @endforelse
-                    </table>
-                </div>
-    
-            <!-- Pagination -->
-            {{ $products->links() }}
-            
+                
+                @livewire('tables.laporan-produk-table')
+        
             </div>
         </div>
     </section>
+    
+    
 
     {{-- Laporan Kasir --}}
     <section class="bg-gray-50 dark:bg-gray-900 antialiased mt-4 mb-4">
         <div class="mx-auto max-w-screen-4xl">
             <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-                <div class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 border-t dark:border-gray-700">
-                    <div class="w-full md:w-1/2">
-                        <form class="flex items-center">
-                            <label for="search-pengguna" class="sr-only">Search</label>
-                            <div class="relative w-full">
-                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                    <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
-                                    </svg>
-                                </div>
-                                <input type="text" id="search-pengguna" name="search-pengguna" placeholder="Search for pengguna" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-80 pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr>
-                                <th scope="col" class="p-4">
-                                    <div class="flex items-center">
-                                        <input id="checkbox-all" type="checkbox" class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="checkbox-all" class="sr-only">checkbox</label>
-                                    </div>
-                                </th>
-                                <th scope="col" class="p-4">Username</th>
-                                <th scope="col" class="p-4"></th>
-                                <th scope="col" class="p-4"></th>
-                                <th scope="col" class="p-4"></th>
-                                <th scope="col" class="p-4">Nama</th>
-                                <th scope="col" class="p-4"></th>
-                                <th scope="col" class="p-4"></th>
-                                <th scope="col" class="p-4"></th>
-                                <th scope="col" class="p-4"></th>
-                            </tr>
-                        </thead>
-                        @forelse ( $users as $pengguna )
-                        <tbody>
-                            <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <td class="p-4 w-4">
-                                    <div class="flex items-center">
-                                        <input id="checkbox-table-search-1" type="checkbox" onclick="event.stopPropagation()" class="w-4 h-4 text-primary-600 bg-gray-100 rounded border-gray-300 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                        <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                                    </div>
-                                </td>
-                                <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <div class="flex items-center mr-3">
-                                        <img src="{{ $pengguna->foto }}" alt="{{ $pengguna->username }}" class="h-8 w-auto mr-3">
-                                        {{ $pengguna->username }}
-                                    </div>
-                                </th>
-                                <td class="px-4 py-3">
-                                    <span class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300"></span>
-                                </td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                </td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"></td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $pengguna->nama }}</td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <div class="flex items-center">
-                                    
-                                        <span class="text-gray-500 dark:text-gray-400 ml-1"></span>
-                                    </div>
-                                </td>
-                                <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    <div class="flex items-center">
-                                    </div>
-                                </td>
-                                <td class="px-4 py-3"></td>
-                                <td class="px-4 py-3 font-medium place-items-end text-gray-900 whitespace-nowrap dark:text-white">
-                                </td>
-                            </tr>
-                        </tbody>
-                        @empty
-                            <p>Pengguna tidak ditemukan</p>
-                        @endforelse
-                    </table>
-                </div>
-    
-            <!-- Pagination -->
-            {{ $users->links() }}
-    
+                
+                @livewire('tables.laporan-kasir-table')
+
             </div>
         </div>
     </section>
+   
 
 <!-- Delete Modal -->
 <div id="delete-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -297,5 +153,7 @@
     </div>
 </div>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+
 </x-app-layout>

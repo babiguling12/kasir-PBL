@@ -37,11 +37,20 @@ class StokMasuk extends Model
     }
 
 
-    public static function getTodayStokMasuk($currentDate) {
-        return self::selectRaw('DATE(tanggal) as date, SUM(jumlah) as total_stokmasuk')
-            ->whereDate('tanggal', $currentDate) 
-            ->groupByRaw('DATE(tanggal)') 
-            ->orderBy('date', 'asc')
-            ->get();
+    public static function getStokMasuk($startDate = null, $endDate = null) {
+        $query = self::selectRaw('DATE(tanggal) as date, SUM(jumlah) as total_stokmasuk')
+                     ->groupByRaw('DATE(tanggal)')
+                     ->orderBy('date', 'asc');
+    
+        if ($startDate && $endDate) {
+            $query->whereBetween('tanggal', [$startDate, $endDate]);
+        } elseif ($startDate) {
+            $query->whereDate('tanggal', '>=', $startDate);
+        } elseif ($endDate) {
+            $query->whereDate('tanggal', '<=', $endDate);
+        }
+    
+        return $query->get();
     }
+    
 }

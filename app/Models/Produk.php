@@ -45,5 +45,12 @@ class Produk extends Model
     public function stok_masuk(): HasMany {
         return $this->hasMany(StokMasuk::class, 'barcode_id');
     }
+
+    public static function getDataProduk($search) {
+        return self::where('nama_produk', 'like', '%' . $search . '%')->latest()->paginate(5);
+    }
     
+    public static function getProduk(){
+        return self::all();
+    }
 }

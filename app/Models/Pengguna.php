@@ -25,4 +25,8 @@ class Pengguna extends Authenticatable
     public function transaksi(): HasMany {
         return $this->hasMany(Transaksi::class, 'kasir_id');
     }
+
+    public static function getDataUser($search) {
+        return self::where('nama', 'like', '%' . $search . '%')->latest()->paginate(5);
+    }
 }
