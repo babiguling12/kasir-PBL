@@ -19,6 +19,6 @@ class KategoriProduk extends Model
     }
 
     public static function getDataKategori($search) {
-        return Self::where('nama_kategori', 'like', '%' . $search . '%');
+        return Self::where('nama_kategori', 'like', '%' . $search . '%')->latest()->paginate(5);
     }
 }

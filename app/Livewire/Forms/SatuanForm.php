@@ -20,6 +20,7 @@ class SatuanForm extends Form
 
     public function tambahSatuan(SatuanProduk $satuanProduk) {
         $this->satuanProduk = $satuanProduk;
+        
         $this->satuan = $satuanProduk->nama_satuan;
     }
 

@@ -5,7 +5,8 @@
 <section class="bg-gray-50 dark:bg-gray-900 antialiased">
     <div class="mx-auto max-w-screen-4xl">
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
-            @livewire('kategori-table')
+
+            @livewire('tables.kategori-table')
         
         </div>
     </div>

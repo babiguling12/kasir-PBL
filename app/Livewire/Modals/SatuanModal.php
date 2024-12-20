@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Modals;
 
 use Livewire\Component;
 use App\Models\SatuanProduk;
@@ -27,6 +27,6 @@ class SatuanModal extends ModalComponent
     }
     public function render()
     {
-        return view('livewire.satuan-form');
+        return view('livewire.forms.satuan-form');
     }
 }

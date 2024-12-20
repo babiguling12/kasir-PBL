@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Tables;
 
 use Livewire\Component;
+use App\Models\Supplier;
 use Livewire\Attributes\On;
-use App\Models\SatuanProduk;
 use Livewire\WithPagination;
 
-class SatuanTable extends Component
+class SupplierTable extends Component
 {
     use WithPagination;
 
@@ -15,18 +15,18 @@ class SatuanTable extends Component
 
     protected $queryString = ['search'];
 
-    public function updatingSearch() {
+    public function updatingSearch()
+    {
         $this->resetPage();
     }
 
     #[On('refresh')]
     public function refresh() {}
 
-
     public function render()
     {
-        return view('livewire.satuan-table', [
-            'satuan' => SatuanProduk::getDataSatuan($this->search)
+        return view('livewire.tables.supplier-table', [
+            'suppliers' => Supplier::getDataSupplier($this->search)
         ]);
     }
 }

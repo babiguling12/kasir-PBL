@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Modals;
 
 use App\Models\Supplier;
 use App\Livewire\Forms\SupplierForm;
@@ -29,6 +29,6 @@ class SupplierModal extends ModalComponent
 
     public function render()
     {
-        return view('livewire.supplier-form');
+        return view('livewire.forms.supplier-form');
     }
 }

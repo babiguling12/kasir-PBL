@@ -6,7 +6,7 @@
     <div class="mx-auto max-w-screen-4xl">
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
 
-            @livewire('satuan-table')
+            @livewire('tables.satuan-table')
         
         </div>
     </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Forms;
 
 use App\Models\KategoriProduk;
 use Livewire\Form;

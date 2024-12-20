@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Modals;
+
+use Livewire\Component;
 
 use App\Models\KategoriProduk;
-use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
+use App\Livewire\Forms\KategoriForm;
 
 class KategoriModal extends ModalComponent
 {
@@ -26,6 +28,6 @@ class KategoriModal extends ModalComponent
     }
     public function render()
     {
-        return view('livewire.kategori-form');
+        return view('livewire.forms.kategori-form');
     }
 }

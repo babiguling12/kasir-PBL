@@ -30,6 +30,12 @@ class StokMasuk extends Model
         return $this->belongsTo(Supplier::class);
     }
 
+    public static function getDataStokMasuk($search) {
+        return Self::whereHas('produk', fn($query) => $query->where('nama_produk', 'like', '%' . $search . '%')->orWhere('barcode', 'like', '%' . $search . '%'))
+        ->orWhereHas('supplier', fn($query) => $query->where('nama', 'like', '%' . $search . '%'))
+        ->latest()->paginate(10);
+    }
+
 
     public static function getTodayStokMasuk($currentDate) {
         return self::selectRaw('DATE(tanggal) as date, SUM(jumlah) as total_stokmasuk')
