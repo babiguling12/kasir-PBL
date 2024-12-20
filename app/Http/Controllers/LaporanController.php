@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Produk;
+use App\Models\Pengguna;
 use App\Models\Transaksi;
-use App\Models\TransaksiDetail;
 use Illuminate\Http\Request;
+use App\Models\TransaksiDetail;
 
 class LaporanController extends Controller
 {
@@ -15,6 +17,14 @@ class LaporanController extends Controller
     public function histori()
     {
         return view('core.laporan.histori.all_histori', ['histori' => Transaksi::latest()->paginate(5)]);
+    }
+
+    public function all_laporan()
+    {
+        return view('core.laporan.all_laporan', [
+            'products' => Produk::latest()->paginate(5),
+            'users' => Pengguna::latest()->paginate(5)
+        ]);
     }
 
     /**

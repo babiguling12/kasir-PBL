@@ -60,6 +60,8 @@ Route::middleware(['auth'])->group(function (){
     Route::get('histori', [LaporanController::class, 'histori'])->name('page.histori');
     Route::get('/histori/detail/{id}', [LaporanController::class, 'Detail'])->name('page.transaksi.detail');
 
+    // laporan keseluruhan
+    Route::get('laporan', [LaporanController::class, 'all_laporan'])->name('page.laporankeseluruhan')->middleware('isKasir');
 
 
     Route::get('logout', LogoutController::class)->name('logout');

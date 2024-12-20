@@ -3,7 +3,7 @@
     <div class="antialiased bg-gray-50 dark:bg-gray-900">
         <div class=" ">
             {{-- Card --}}
-            <div class="grid grid-cols-1 md:grid-cols-3 h-48 gap-4 p-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 h-48 gap-4 mt-4 mb-4">
 
                 <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
                     style="background-color: #0FADEC;">
@@ -60,7 +60,7 @@
                 'lastYear' => $lastYearSales
                 ]);
             </script>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-auto p-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 mb-4">
                 <!-- Diagram Lingkaran: Penjualan Barang -->
                 <div class="bg-white md:col-span-1 p-4 rounded-lg shadow-md">
                     <h2 class="text-xl font-semibold mb-4">Barang Terlaris</h2>

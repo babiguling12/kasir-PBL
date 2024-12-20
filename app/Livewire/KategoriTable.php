@@ -25,7 +25,7 @@ class KategoriTable extends Component
     public function render()
     {
         return view('livewire.kategori-table', [
-            'kategori' => KategoriProduk::getDataKategori($this->search)
+            'kategori' => KategoriProduk::getDataKategori($this->search)->paginate(5)
         ]);
     }
 }
