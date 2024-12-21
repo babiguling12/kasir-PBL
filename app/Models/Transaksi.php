@@ -49,7 +49,7 @@ class Transaksi extends Model
 
     public static function getDataTransaksi($startDate = null, $endDate = null)
         {
-            $query = Transaksi::query();
+            $query = Self::query();
             if ($startDate && !$endDate) {
                 $query->where('tanggal', '>=', $startDate);
             }
@@ -61,6 +61,11 @@ class Transaksi extends Model
             }
 
             return $query->get();
+        }
+
+        public static function getRiwayat($search) {
+            return Self::where('nota', 'like', '%' . $search . '%')
+            ->latest()->paginate(10);
         }
 
 }

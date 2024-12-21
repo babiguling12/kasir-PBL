@@ -23,6 +23,9 @@ class Supplier extends Model
     }
 
     public static function getDataSupplier($search) {
-        return self::where('nama', 'like', '%' . $search . '%')->orwhere('alamat', 'like', '%' . $search . '%')->orwhere('telepon', 'like', '%' . $search . '%')->latest()->paginate(10);
+        return self::where('nama', 'like', '%' . $search . '%')
+        ->orwhere('alamat', 'like', '%' . $search . '%')
+        ->orwhere('telepon', 'like', '%' . $search . '%')
+        ->latest()->paginate(10);
     }
 }

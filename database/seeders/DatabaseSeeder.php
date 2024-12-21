@@ -37,9 +37,9 @@ class DatabaseSeeder extends Seeder
             SupplierSeeder::class,
             StokMasukSeeder::class,
             StokKeluarSeeder::class,
+            PenggunaSeeder::class,
             TransaksiSeeder::class,
             TransaksiDetailSeeder::class,
-            PenggunaSeeder::class
         ]);
     }
 }

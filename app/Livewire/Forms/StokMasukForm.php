@@ -5,6 +5,7 @@ namespace App\Livewire\Forms;
 use Livewire\Form;
 use Livewire\Component;
 use App\Models\StokMasuk;
+use Illuminate\Support\Carbon;
 
 class StokMasukForm extends Form
 {
@@ -19,9 +20,9 @@ class StokMasukForm extends Form
     public function rules() {
         return [
             'tanggal' => 'required',
-            'produk' => 'required|exists:Produk,id',
+            'produk' => 'required|exists:produk,id',
             'jumlah' => 'required',
-            'supplier' => 'required|exists:Supplier,id',
+            'supplier' => 'required|exists:supplier,id',
         ];
     }
 
@@ -40,7 +41,7 @@ class StokMasukForm extends Form
 
         if (!$this->stokMasuk) {
             StokMasuk::create([
-                'tanggal' => now()->format('Y-m-d'),
+                'tanggal' => Carbon::parse($this->tanggal)->format('Y-m-d'), // Carbon::parse()->format() untuk mengkonversi date ke format yang diinginkan
                 'barcode_id' => $this->produk,
                 'jumlah' => $this->jumlah,
                 'keterangan' => $this->keterangan,

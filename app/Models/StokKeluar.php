@@ -19,13 +19,16 @@ class StokKeluar extends Model
         'keterangan',
     ];
 
+    protected $with = ['produk'];
+
     public function produk(): BelongsTo {
         return $this->belongsTo(Produk::class, 'barcode_id');
     }
 
     public static function getStokKeluar($startDate = null, $endDate = null)
         {
-            $query = StokKeluar::query();
+            $query = Self::query();
+            
             if ($startDate && !$endDate) {
                 $query->where('tanggal', '>=', $startDate);
             }
@@ -37,5 +40,11 @@ class StokKeluar extends Model
             }
 
             return $query->get();
+        }
+
+        public static function getDataStokKeluar($search) {
+            return Self::whereHas('produk', fn($query) => $query->where('nama_produk', 'like', '%' . $search . '%')
+            ->orWhere('barcode', 'like', '%' . $search . '%'))
+            ->latest()->paginate(10);
         }
 }

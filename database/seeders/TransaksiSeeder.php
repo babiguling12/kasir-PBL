@@ -14,7 +14,7 @@ class TransaksiSeeder extends Seeder
      */
     public function run(): void
     {
-        Transaksi::factory(10)->recycle([
+        Transaksi::factory(25)->recycle([
             Pengguna::all(),
         ])->create();
     }

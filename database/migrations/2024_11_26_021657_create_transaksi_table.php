@@ -22,6 +22,7 @@ return new class extends Migration
                 table: 'pengguna',
                 indexName: 'transaksi__kasir_id_foreign'
             )->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('metode_pembayaran', ['cash', 'transfer']);
             $table->timestamps();
         });
     }
