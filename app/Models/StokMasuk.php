@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -38,8 +39,8 @@ class StokMasuk extends Model
 
 
     public static function getStokMasuk($startDate = null, $endDate = null) {
-        $query = self::selectRaw('DATE(tanggal) as date, SUM(jumlah) as total_stokmasuk')
-                     ->groupByRaw('DATE(tanggal)')
+        $query = self::selectRaw('DATE(tanggal) as date, barcode_id , SUM(jumlah) as total_stokmasuk')
+        ->groupBy(DB::raw('DATE(tanggal), barcode_id'))
                      ->orderBy('date', 'asc');
     
         if ($startDate && $endDate) {

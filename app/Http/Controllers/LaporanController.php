@@ -22,15 +22,7 @@ class LaporanController extends Controller
 
     public function all_laporan()
     {
-        $transaksi = Transaksi::getDataSales('date');
-        $stok = StokMasuk::getStokMasuk();
-        $produk = Produk::getProduk();
-
-        return view('core.laporan.all_laporan',[
-            'transaksi' => $transaksi,
-            'stok' => $stok,
-            'produk' => $produk
-        ]);
+        return view('core.laporan.all_laporan');
     }
 
     public function Detail($id)

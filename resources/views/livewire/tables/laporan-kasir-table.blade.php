@@ -66,7 +66,9 @@
                     <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"></td>
                     <td class="px-4 py-3"></td>
                     <td class="px-4 py-3 "></td>
-                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $pengguna->transaksi->count('transaksi_id') }}</td>
+                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{
+                        $transaksi->where('kasir_id', $pengguna->id)->count()}}
+                    </td>
                 </tr>
             @empty
                 <tr>

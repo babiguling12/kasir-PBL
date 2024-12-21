@@ -58,10 +58,18 @@
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $produk->barcode }}</td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $produk->satuan->nama_satuan }}</td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $produk->kategori->nama_kategori }}</td>
-                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $produk->stok_masuk->sum('jumlah') }}</td>
-                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $produk->stok_keluar->sum('jumlah') }}</td>
-                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$produk->terjual}}</td>
-                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">Rp {{ number_format($produk->harga * $produk->terjual, 0, ',', '.') }}</td>
+                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $stokmasuk->where('barcode_id',$produk->id)->sum('total_stokmasuk')}}
+                        </td>
+                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $stokkeluar->where('barcode_id',$produk->id)->sum('jumlah')}}
+                        </td>
+                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $produk_terjual->where('barcode_id', $produk->id)->sum('qty')}}</td>
+                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            @php
+                                $terjual=$produk_terjual->where('barcode_id', $produk->id)->sum('qty');
+                            @endphp
+                            Rp {{ number_format($produk->harga * $terjual, 0, ',', '.') }}</td>
                         <td class="px-4 py-3"></td>
                         <td class="px-4 py-3 font-medium place-items-end text-gray-900 whitespace-nowrap dark:text-white">
                         </td>

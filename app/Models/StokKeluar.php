@@ -22,4 +22,20 @@ class StokKeluar extends Model
     public function produk(): BelongsTo {
         return $this->belongsTo(Produk::class, 'barcode_id');
     }
+
+    public static function getStokKeluar($startDate = null, $endDate = null)
+        {
+            $query = StokKeluar::query();
+            if ($startDate && !$endDate) {
+                $query->where('tanggal', '>=', $startDate);
+            }
+            if (!$startDate && $endDate) {
+                $query->where('tanggal', '<=', $endDate);
+            }
+            if ($startDate && $endDate) {
+                $query->whereBetween('tanggal', [$startDate, $endDate]);
+            }
+
+            return $query->get();
+        }
 }

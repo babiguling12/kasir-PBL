@@ -44,7 +44,24 @@ class Transaksi extends Model
             $query->whereDate('tanggal', $dateValue);
         }
     
-        return $query->get()->keyBy('date_unit'); // Optional: Key the result by date_unit
+        return $query->get()->keyBy('date_unit'); 
     }
+
+    public static function getDataTransaksi($startDate = null, $endDate = null)
+        {
+            $query = Transaksi::query();
+            if ($startDate && !$endDate) {
+                $query->where('tanggal', '>=', $startDate);
+            }
+            if (!$startDate && $endDate) {
+                $query->where('tanggal', '<=', $endDate);
+            }
+            if ($startDate && $endDate) {
+                $query->whereBetween('tanggal', [$startDate, $endDate]);
+            }
+
+            return $query->get();
+        }
+
 }
 
