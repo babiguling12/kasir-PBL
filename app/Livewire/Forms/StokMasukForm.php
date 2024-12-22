@@ -19,12 +19,22 @@ class StokMasukForm extends Form
 
     public function rules() {
         return [
-            'tanggal' => 'required',
             'produk' => 'required|exists:produk,id',
-            'jumlah' => 'required',
+            'jumlah' => 'required|numeric',
             'supplier' => 'required|exists:supplier,id',
+            'keterangan' => 'required',
         ];
     }
+
+    protected $messages = [
+        'produk.required' => 'Produk wajib diisi',
+        'produk.exists' => 'Produk tidak ditemukan',
+        'jumlah.required' => 'Jumlah wajib diisi',
+        'jumlah.numeric' => 'Jumlah harus berupa angka',
+        'supplier.required' => 'Supplier wajib diisi',
+        'supplier.exists' => 'Supplier tidak ditemukan',
+        'keterangan.required' => 'Keterangan wajib diisi',
+    ];
 
     public function tambahStokMasuk(StokMasuk $stokMasuk) {
         $this->stokMasuk = $stokMasuk;

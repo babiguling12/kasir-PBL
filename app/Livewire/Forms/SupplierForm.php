@@ -28,6 +28,13 @@ class SupplierForm extends Form
         ];
     }
 
+    protected $messages = [
+        'nama.required' => 'Nama wajib diisi',
+        'telepon.required' => 'Nomor telepon wajib diisi',
+        'telepon.unique' => 'Nomor telepon sudah digunakan',
+        'alamat.required' => 'Alamat wajib diisi',
+    ];
+
     public function setSupplier(Supplier $supplier)
     {
         $this->supplier = $supplier;

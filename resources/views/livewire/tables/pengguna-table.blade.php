@@ -2,8 +2,8 @@
     <div
         class="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 py-4 border-t dark:border-gray-700">
         <div class="w-full md:w-1/2">
-            <div class="flex items-center">
-                <label for="search-supplier" class="sr-only">Search</label>
+            <form class="flex items-center">
+                <label for="search-pengguna" class="sr-only">Search</label>
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
@@ -12,16 +12,16 @@
                                 d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" />
                         </svg>
                     </div>
-                    <input wire:model.live.rebounce.100ms="search" type="text" id="search-supplier"
-                        name="search-supplier" placeholder="Search for supplier"
+                    <input type="text" wire:model.live.rebounce.100ms="search" id="search-pengguna"
+                        name="search-pengguna" placeholder="Search for pengguna"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-80 pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                 </div>
-            </div>
+            </form>
         </div>
         <div
             class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
             @if (auth()->user()->role === 'admin')
-                <button type="button" wire:click="$dispatch('openModal', { component: 'modals.supplier-modal' })"
+                <button type="button" wire:click="$dispatch('openModal', { component: 'modals.pengguna-modal'})"
                     class="flex items-center justify-center text-white bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                     <svg class="h-3.5 w-3.5 mr-1.5 -ml-1" fill="currentColor" viewbox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -44,19 +44,19 @@
                             <label for="checkbox-all" class="sr-only">checkbox</label>
                         </div>
                     </th>
+                    <th scope="col" class="p-4">Username</th>
+                    <th scope="col" class="p-4"></th>
+                    <th scope="col" class="p-4"></th>
+                    <th scope="col" class="p-4"></th>
                     <th scope="col" class="p-4">Nama</th>
                     <th scope="col" class="p-4"></th>
-                    <th scope="col" class="p-4">Alamat</th>
                     <th scope="col" class="p-4"></th>
-                    <th scope="col" class="p-4">No Telepon</th>
-                    <th scope="col" class="p-4"></th>
-                    <th scope="col" class="p-4">Keterangan</th>
                     <th scope="col" class="p-4"></th>
                     <th scope="col" class="p-4"></th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($suppliers as $supplier)
+                @forelse ($users as $pengguna)
                     <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <td class="p-4 w-4">
                             <div class="flex items-center">
@@ -68,25 +68,28 @@
                         <th scope="row"
                             class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="flex items-center mr-3">
-                                {{ $supplier->nama }}
+                                <img src="{{ asset('storage/' . $pengguna->foto) }}" alt="{{ $pengguna->username }}"
+                                    class="h-8 w-auto mr-3">
+                                {{ $pengguna->username }}
                             </div>
                         </th>
                         <td class="px-4 py-3">
+                            <span
+                                class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300"></span>
                         </td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            <span
-                                class="bg-primary-100 text-primary-800 text-xs font-medium px-2 py-0.5 rounded dark:bg-primary-900 dark:text-primary-300">{{ $supplier->alamat }}</span>
                         </td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"></td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ preg_replace('/(\d{4})(?=\d)/', '$1 ', $supplier->telepon) }}</td> {{-- preg_replace('/(\d4)(?=\d)/', '$1 ', $supplier->telepon) buat misahin nomer telpon jadi 4 karakter --}}
+                            {{ $pengguna->nama }}</td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="flex items-center">
+
+                                <span class="text-gray-500 dark:text-gray-400 ml-1"></span>
                             </div>
                         </td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <div class="flex items-center">
-                                <span class="text-gray-500 dark:text-gray-400 ml-1">{{ $supplier->keterangan }}</span>
                             </div>
                         </td>
                         <td class="px-4 py-3"></td>
@@ -95,9 +98,9 @@
                             <div class="flex items-center space-x-4">
                                 @if (auth()->user()->role === 'admin')
                                     <button type="button"
-                                        wire:click="$dispatch('openModal', { component: 'modals.supplier-modal', arguments: {supplier: {{ $supplier->id }} }})"
+                                        wire:click="$dispatch('openModal', { component: 'modals.pengguna-modal', arguments: {pengguna: {{ $pengguna->id }} }})"
                                         aria-controls="drawer-update-product"
-                                        class="tampilModalEdit py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                                        class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
                                             viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                             <path
@@ -108,7 +111,8 @@
                                         </svg>
                                         Edit
                                     </button>
-                                    <button type="button" wire:click="$dispatch('openModal', { component: 'data-delete', arguments: {model: 'Supplier', id: {{ $supplier->id }} }})"
+                                    <button type="button"
+                                        wire:click="$dispatch('openModal', { component: 'data-delete', arguments: {model: 'Pengguna', id: {{ $pengguna->id }} }})"
                                         class="flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 -ml-0.5"
                                             viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -123,12 +127,12 @@
                         </td>
                     </tr>
                 @empty
-                <tr>
-                    <td class="px-4 pt-5 font-medium text-center text-xl text-gray-400 whitespace-nowrap dark:text-white"
-                        colspan="9" rowspan="10">
-                        Data Supplier Belum Ada
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="px-4 pt-5 font-medium text-center text-xl text-gray-400 whitespace-nowrap dark:text-white"
+                            colspan="9" rowspan="10">
+                            Data Pengguna Belum Ada
+                        </td>
+                    </tr>
                 @endforelse
             </tbody>
         </table>
@@ -136,7 +140,6 @@
 
     <!-- Pagination -->
     <div class="p-5">
-        {{ $suppliers->links() }}
+        {{ $users->links() }}
     </div>
-
 </div>

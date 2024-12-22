@@ -18,6 +18,11 @@ class SatuanForm extends Form
         ];
     }
 
+    protected $messages = [
+        'satuan.required' => 'Satuan wajib diisi',
+        'satuan.max' => 'Satuan maksimal 100 karakter',
+    ];
+
     public function tambahSatuan(SatuanProduk $satuanProduk) {
         $this->satuanProduk = $satuanProduk;
         

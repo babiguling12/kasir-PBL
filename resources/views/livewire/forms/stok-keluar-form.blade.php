@@ -16,8 +16,8 @@
             
             <div class="sm:col-span-2">
                 <label for="tanggal" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal</label>
-                <input type="date" name="tanggal" id="tanggal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ now()->format('Y-m-d') }}" required="" readonly>
-                @error('tanggal') <span class="error">{{ $message }}</span> @enderror
+                <input type="date" name="tanggal" id="tanggal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{ now()->format('Y-m-d') }}" readonly>
+                @error('form.tanggal') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label for="produk" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Produk</label>
@@ -29,12 +29,12 @@
                     @endforeach
                     
                 </select>
-                @error('produk') <span class="error">{{ $message }}</span> @enderror
+                @error('form.produk') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label for="jumlah" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jumlah</label>
-                <input type="number" name="jumlah" id="jumlah" wire:model="form.jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukan Jumlah" required="">
-                @error('jumlah') <span class="error">{{ $message }}</span> @enderror
+                <input type="number" name="jumlah" id="jumlah" wire:model="form.jumlah" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukan Jumlah">
+                @error('form.jumlah') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
             <div class="sm:col-span-2">
                 <label for="keterangan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keterangan</label>
@@ -44,7 +44,7 @@
                     <option value="hilang">Hilang</option>
                     <option value="kedaluwarsa">Kedaluwarsa</option>
                 </select>
-                @error('keterangan') <span class="error">{{ $message }}</span> @enderror
+                @error('form.keterangan') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
         </div>
          

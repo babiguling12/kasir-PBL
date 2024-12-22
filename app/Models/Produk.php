@@ -47,7 +47,11 @@ class Produk extends Model
     }
 
     public static function getDataProduk($search) {
-        return self::where('nama_produk', 'like', '%' . $search . '%')->latest()->paginate(5);
+        return Self::where('nama_produk', 'like', '%'. $search . '%')
+        ->orWhere('barcode', 'like', '%'. $search . '%')
+        ->whereHas('kategori', fn($query) => $query->where('nama_kategori', 'like', '%' . $search . '%'))
+        ->whereHas('satuan', fn($query) => $query->where('nama_satuan', 'like', '%' . $search . '%'))
+        ->latest()->paginate(5);
     }
     
     public static function getProduk(){

@@ -18,6 +18,11 @@ class KategoriForm extends Form
         ];
     }
 
+    protected $messages = [
+        'kategori.required' => 'Kategori harus diisi',
+        'kategori.max' => 'Kategori maksimal 100 karakter',
+    ];
+
     public function tambahKategori(KategoriProduk $kategoriProduk) {
         $this->kategoriProduk = $kategoriProduk;
         $this->kategori = $kategoriProduk->nama_kategori;

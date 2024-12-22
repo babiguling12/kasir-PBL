@@ -22,9 +22,9 @@
                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Satuan</label>
                  <input type="text" name="satuan" id="satuan" wire:model="form.satuan"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                     placeholder="Masukan Satuan" required="">
-                 @error('satuan')
-                     <span class="error">{{ $message }}</span>
+                     placeholder="Masukan Satuan">
+                 @error('form.satuan')
+                     <span class="error text-red-500 text-sm">{{ $message }}</span>
                  @enderror   
              </div>
          </div>

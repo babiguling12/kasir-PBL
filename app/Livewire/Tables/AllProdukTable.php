@@ -2,12 +2,12 @@
 
 namespace App\Livewire\Tables;
 
+use App\Models\Produk;
 use Livewire\Component;
-use App\Models\Transaksi;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
 
-class AllHistoriTable extends Component
+class AllProdukTable extends Component
 {
     use WithPagination;
 
@@ -24,8 +24,8 @@ class AllHistoriTable extends Component
 
     public function render()
     {
-        return view('livewire.tables.all-histori-table', [
-            'histori' => Transaksi::getRiwayat($this->search)
+        return view('livewire.tables.all-produk-table', [
+            'products' => Produk::getDataProduk($this->search)
         ]);
     }
 }

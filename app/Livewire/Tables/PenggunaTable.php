@@ -3,11 +3,11 @@
 namespace App\Livewire\Tables;
 
 use Livewire\Component;
-use App\Models\Transaksi;
+use App\Models\Pengguna;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
 
-class AllHistoriTable extends Component
+class PenggunaTable extends Component
 {
     use WithPagination;
 
@@ -24,8 +24,8 @@ class AllHistoriTable extends Component
 
     public function render()
     {
-        return view('livewire.tables.all-histori-table', [
-            'histori' => Transaksi::getRiwayat($this->search)
+        return view('livewire.tables.pengguna-table', [
+            'users' => Pengguna::getDataUser($this->search)
         ]);
     }
 }
