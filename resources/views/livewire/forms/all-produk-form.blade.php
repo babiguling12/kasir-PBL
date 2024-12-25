@@ -23,7 +23,7 @@
             </div>
             <div>
                 <label for="barcode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Barcode</label>
-                <input type="number" name="barcode" id="barcode" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="EAN 13"  autocomplete="off">
+                <input type="number" name="barcode" id="barcode" wire:model="form.barcode" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="EAN 13"  autocomplete="off">
                 @error('form.barcode') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
             <div>
@@ -52,15 +52,15 @@
             </div>
             <div>
                 <label for="harga" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Harga</label>
-                <input type="number" name="harga" id="harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukan Harga"  autocomplete="off">
+                <input type="number" name="harga" id="harga" wire:model="form.harga" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukan Harga"  autocomplete="off">
             </div>
             <div>
                 <label for="stok" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stok</label>
-                <input type="number" name="stok" id="stok" value="100" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="100" readonly>
+                <input type="number" name="stok" id="stok"  wire:model="form.stok" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="100" readonly>
             </div>
             <div>
                 <label for="terjual" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Terjual</label>
-                <input type="number" name="terjual" id="terjual" value="100" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="50" readonly>
+                <input type="number" name="terjual" id="terjual"  wire:model="form.terjual" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="50" readonly>
             </div>
         </div>
         <div class="mb-4">
@@ -77,7 +77,7 @@
                         </p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                     </div>
-                    <input id="dropzone-file" type="file" name="foto" class="hidden">
+                    <input id="dropzone-file" type="file" name="foto" wire:model="form.foto" class="hidden" onchange="previewImage(event)">
                     @error('form.foto') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
                 </label>
             </div>

@@ -26,7 +26,7 @@
                 </div>
                 <div>
                     <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                    <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukan Password">
+                    <input type="password" name="password" wire:model="form.password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Masukan Password">
                     @error('form.password') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
             </div>
@@ -44,7 +44,7 @@
                             </p>
                             <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                         </div>
-                        <input id="dropzone-file" type="file" name="profile" wire:model="form.profile" class="hidden">
+                        <input id="dropzone-file" type="file" name="profile" wire:model="form.foto" class="hidden">
                         @error('form.profile') <span class="error text-red-500 text-sm">{{ $message }}</span> @enderror
                     </label>
                 </div>

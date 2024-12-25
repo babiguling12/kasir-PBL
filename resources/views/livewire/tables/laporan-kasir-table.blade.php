@@ -52,7 +52,8 @@
                     </td>
                     <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div class="flex items-center mr-3">
-                            <img src="{{ $pengguna->foto }}" alt="{{ $pengguna->username }}" class="h-8 w-auto mr-3">
+                            <img src="{{ asset('storage/' . $pengguna->foto) }}" alt="{{ $pengguna->username }}"
+                            class="h-12 w-12 mr-3 object-cover rounded">
                             {{ $pengguna->username }}
                         </div>
                     </th>

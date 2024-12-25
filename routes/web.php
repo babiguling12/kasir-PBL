@@ -13,7 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StokMasukController;
 use App\Http\Controllers\StokKeluarController;
 use App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function() {
     if(auth()->check()) {
@@ -63,6 +63,8 @@ Route::middleware(['auth'])->group(function (){
     // laporan keseluruhan
     Route::get('laporan', [LaporanController::class, 'all_laporan'])->name('page.laporankeseluruhan')->middleware('isKasir');
 
+    //transaksi
+    // Route::get('transaksi',[TransaksiController::class,'index'])->name('page.transaksi');
 
     Route::get('logout', LogoutController::class)->name('logout');
 
