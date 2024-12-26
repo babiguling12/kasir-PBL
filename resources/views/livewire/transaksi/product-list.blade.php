@@ -33,7 +33,7 @@
             <div wire:click.prevent="pilihProduk({{ $product }})" class="max-w-64 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 cursor-pointer">
                 <div>
                     <img class="rounded-t-lg aspect-square object-cover"
-                        src="https://flowbite.com/docs/images/blog/image-1.jpg" alt="" />
+                        src="{{ asset('storage/' . $product->foto) }}" alt="{{ $product->nama_produk }}" />
                 </div>
                 <div class="p-3">
                     <div>

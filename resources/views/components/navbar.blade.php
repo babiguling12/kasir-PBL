@@ -34,9 +34,8 @@
                     alt="user" />
             </button>
             <!-- Dropdown menu -->
-            <div class="hidden
-            style="z-index: 9"my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
-                id="dropdown">
+            <div class="hidden my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+                style="z-index: 9" id="dropdown">
                 <div class="py-3 px-4">
                     <span
                         class="block text-sm font-semibold text-gray-900 dark:text-white">{{ auth()->user()->nama }}</span>
