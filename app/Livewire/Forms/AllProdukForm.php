@@ -19,15 +19,15 @@ class AllProdukForm extends Form
     public $kategori = '';
     public $satuan = '';
     public $harga = '';
-    public $stok = '';
-    public $terjual = '';
-    public $foto = '';
+    public $stok='100';
+    public $terjual='100';
+    public $foto;
     
 
     public function rules() {
         $uniqueBarcodeRule = $this->produk ?
-            'required|min:13|max:13|numeric|unique:produk,barcode,' . $this->produk->id
-            : 'required|min:13|max:13|numeric|unique:produk,barcode';
+            'required|digits:13|numeric|unique:produk,barcode,' . $this->produk->id
+            : 'required|digits:13|numeric|unique:produk,barcode';
 
         return [
             'nama' => 'required|max: 100',
@@ -43,8 +43,7 @@ class AllProdukForm extends Form
         'nama.required' => 'Nama produk harus diisi',
         'nama.max' => 'Nama produk tidak boleh lebih dari 100 karakter',
         'barcode.required' => 'Barcode produk harus diisi',
-        'barcode.min' => 'Barcode produk harus 13 karakter',
-        'barcode.max' => 'Barcode produk harus 13 karakter',
+        'barcode.digits' => 'Barcode produk harus 13 karakter',
         'barcode.unique' => 'Barcode produk sudah ada',
         'barcode.numeric' => 'Barcode produk harus angka',
         'kategori.required' => 'Kategori produk harus diisi',

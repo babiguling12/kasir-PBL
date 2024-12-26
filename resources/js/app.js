@@ -125,4 +125,5 @@ const penjualanBulanChart = new Chart(ctx2, {
         }
     }
 })
+
 };

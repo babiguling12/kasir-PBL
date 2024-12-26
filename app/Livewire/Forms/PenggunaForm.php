@@ -16,8 +16,9 @@ class PenggunaForm extends Form
     
     public $nama = '';
     public $username = '';
+    public $role = 'kasir';
     public $password = '';
-    public $profile = '';
+    public $foto;
 
     public function rules() {
 
@@ -30,7 +31,7 @@ class PenggunaForm extends Form
             'nama' => 'required|max:255',
             'username' => $uniqueUsernameRule,
             'password' => 'required|min:8|max:12',
-            'profile' => $this->pengguna ? 'nullable|image|mimes:jpeg,jpg,png|max:2048' : 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'foto' => $this->pengguna ? 'nullable|image|mimes:jpeg,jpg,png|max:2048' : 'required|image|mimes:jpeg,jpg,png|max:2048',
         ];
     }
 
@@ -42,41 +43,42 @@ class PenggunaForm extends Form
         'password.required' => 'Password wajib diisi',
         'password.min' => 'Password minimal 8 karakter',
         'password.max' => 'Password maksimal 12 karakter',
-        'profile.required' => 'Profile wajib diisi',
-        'profile.image' => 'Profile harus berupa gambar',
-        'profile.mimes' => 'Profile harus berupa jpeg, jpg, atau png',
-        'profile.max' => 'Profile maksimal 2MB',
+        'foto.required' => 'foto wajib diisi',
+        'foto.image' => 'foto harus berupa gambar',
+        'foto.mimes' => 'foto harus berupa jpeg, jpg, atau png',
+        'foto.max' => 'foto maksimal 2MB',
     ];
 
     public function tambahPengguna(Pengguna $pengguna) {
         $this->pengguna = $pengguna;
-
+        $this->role ='kasir';
         $this->nama = $pengguna->nama;
         $this->username = $pengguna->username;
-        $this->password = $pengguna->password;
-        $this->profile = $pengguna->foto;
+        $this->password = '';
+        $this->foto = $pengguna->foto;
     }
 
     public function tambahData() {
         $this->validate();
 
-        if($this->profile) {
-            $originalFileName = $this->profile->getClientOriginalName();
+        if($this->foto) {
+            $originalFileName = $this->foto->getClientOriginalName();
             $uniqueFileName = uniqid() . '-' . $originalFileName;
-            $storeFilePath = $this->profile->storeAs('img/profile', $uniqueFileName, 'public'); // disimpan di folder storage/app/public
+            $storeFilePath = $this->foto->storeAs('img/profile', $uniqueFileName, 'public'); // disimpan di folder storage/app/public
         }
 
         if (!$this->pengguna) {
             Pengguna::create([
                 'nama' => $this->nama,
                 'username' => $this->username,
+                'role' => $this->role,
                 'password' => bcrypt($this->password),
                 'foto' => $storeFilePath ?? null,
             ]);
             flash()->success('Pengguna berhasil ditambahkan');
         } else {
 
-            if($this->profile && $this->pengguna->foto) {
+            if($this->foto && $this->pengguna->foto) {
                 if (Storage::disk('public')->exists($this->pengguna->foto)) {
                     Storage::disk('public')->delete($this->pengguna->foto);
                 }
@@ -86,6 +88,7 @@ class PenggunaForm extends Form
             $this->pengguna->update([
                 'nama' => $this->nama,
                 'username' => $this->username,
+                'role' => $this->role,
                 'password' => bcrypt($this->password),
                 'foto' => $storeFilePath ?? $this->pengguna->foto,
             ]);

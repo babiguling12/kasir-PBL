@@ -20,6 +20,7 @@ class Pengguna extends Authenticatable
         'nama',
         'password',
         'role',
+        'foto',
     ];
 
     public function transaksi(): HasMany {
