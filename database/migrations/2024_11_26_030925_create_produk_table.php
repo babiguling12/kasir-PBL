@@ -24,8 +24,8 @@ return new class extends Migration
                 indexName: 'produk_satuan_produk_id_foreign'
             )->onDelete('cascade')->onUpdate('cascade');
             $table->integer('harga');
-            $table->integer('stok');
-            $table->integer('terjual');
+            $table->integer('stok')->default(0);
+            $table->integer('terjual')->default(0);
             $table->string('foto');
             $table->timestamps();
         });

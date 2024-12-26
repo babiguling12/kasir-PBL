@@ -48,8 +48,8 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="" disabled selected>Pilih Kategori</option>
 
-                    @foreach ($products as $produk)
-                        <option value="{{ $produk->kategori->id }}">{{ $produk->kategori->nama_kategori }}</option>
+                    @foreach ($categories as $kategori)
+                    <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
                     @endforeach
 
                 </select>
@@ -64,8 +64,8 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                     <option value="" disabled selected>Pilih Satuan</option>
 
-                    @foreach ($products as $produk)
-                        <option value="{{ $produk->satuan->id }}">{{ $produk->satuan->nama_satuan }}</option>
+                    @foreach ($satuan as $stn)
+                    <option value="{{ $stn->id }}">{{ $stn->nama_satuan }}</option>
                     @endforeach
 
                 </select>

@@ -53,5 +53,23 @@ class StokMasuk extends Model
     
         return $query->get();
     }
-    
+
+    protected static function booted() {
+        static::created(function($stokMasuk) { // created : trigger insert after
+            $produk = $stokMasuk->produk;
+            if($produk) {
+                $produk->increment('stok', $stokMasuk->jumlah);
+            }
+        });
+
+        static::updated(function($stokMasuk) { // updated : trigger update after
+            $produk = $stokMasuk->produk;
+
+            if($produk && $stokMasuk->isDirty('jumlah')) { // isDirty() untuk mengecek kolom tertentu apakah sudah diubah atau belum
+                $selisih = $stokMasuk->jumlah - $stokMasuk->getOriginal('jumlah'); // getOriginal() mendapatkan nilai sebelum diubah
+                $produk->increment('stok', $selisih);
+            }
+        });
+    }
+
 }
