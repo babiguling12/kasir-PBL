@@ -47,4 +47,17 @@ class StokKeluar extends Model
             ->orWhere('barcode', 'like', '%' . $search . '%'))
             ->latest()->paginate(10);
         }
+
+        protected static function booted() {
+            static::created(function($stokKeluar) {
+                $produk = $stokKeluar->produk;
+
+                if($produk->stok >= $stokKeluar->jumlah) {
+                    $produk->decrement('stok', $stokKeluar->jumlah);
+                } else {
+                    $produk->stok = 0;
+                    $produk->save();
+                }
+            });
+        }
 }

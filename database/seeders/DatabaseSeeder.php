@@ -31,15 +31,15 @@ class DatabaseSeeder extends Seeder
         // ]);
         
         $this->call([
-            KategoriProdukSeeder::class,
-            SatuanProdukSeeder::class,
-            ProdukSeeder::class,
-            SupplierSeeder::class,
-            StokMasukSeeder::class,
-            StokKeluarSeeder::class,
+            // KategoriProdukSeeder::class,
+            // SatuanProdukSeeder::class,
+            // ProdukSeeder::class,
+            // SupplierSeeder::class,
+            // StokMasukSeeder::class,
+            // StokKeluarSeeder::class,
             PenggunaSeeder::class,
-            TransaksiSeeder::class,
-            TransaksiDetailSeeder::class,
+            // TransaksiSeeder::class,
+            // TransaksiDetailSeeder::class,
         ]);
     }
 }

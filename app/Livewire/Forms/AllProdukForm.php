@@ -19,8 +19,8 @@ class AllProdukForm extends Form
     public $kategori = '';
     public $satuan = '';
     public $harga = '';
-    public $stok='100';
-    public $terjual='100';
+    public $stok='0';
+    public $terjual='0';
     public $foto;
     
 

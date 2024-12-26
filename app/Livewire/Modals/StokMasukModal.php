@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Modals;
 
+use App\Models\Produk;
 use Livewire\Component;
+use App\Models\Supplier;
 use App\Models\StokMasuk;
 use LivewireUI\Modal\ModalComponent;
 use App\Livewire\Forms\StokMasukForm;
@@ -29,7 +31,8 @@ class StokMasukModal extends ModalComponent
     public function render()
     {
         return view('livewire.forms.stok-masuk-form', [
-            'stok_masuk' => StokMasuk::select('barcode_id', 'supplier_id')->get(),
+            'products' => Produk::all(),
+            'suppliers' => Supplier::all(),
         ]);
     }
 }

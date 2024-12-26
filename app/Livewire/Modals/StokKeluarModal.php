@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Modals;
 
+use App\Models\Produk;
 use Livewire\Component;
 use App\Models\StokKeluar;
 use LivewireUI\Modal\ModalComponent;
@@ -29,7 +30,7 @@ class StokKeluarModal extends ModalComponent
     public function render()
     {
         return view('livewire.forms.stok-keluar-form', [
-            'stok_keluar' => StokKeluar::select('barcode_id')->get(),
+            'products' => Produk::all(),
         ]);
     }
 }
