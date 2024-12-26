@@ -14,9 +14,9 @@ class DashboardController extends Controller
         $lastYear = $currentYear - 1;
         $currentDate = now()->toDateString();
         
-        $lastYearSales = Transaksi::getDataSales('YEAR',$lastYear);
-        $thisYearSales = Transaksi::getDataSales('YEAR',$currentYear);
-        $transaksi = Transaksi::getDataSales('DATE',$currentDate)->first() ?? (object) ['total_revenue' => 0, 'total_transaksi' => 0];
+        $lastYearSales = Transaksi::getDataSales($lastYear);
+        $thisYearSales = Transaksi::getDataSales($currentYear);
+        $transaksi = Transaksi::getDataTransaksi($currentDate);
         $stokMasuk = StokMasuk::getStokMasuk($currentDate)->first() ?? (object) ['total_stokmasuk' => 0];
 
         return view('dashboard',[

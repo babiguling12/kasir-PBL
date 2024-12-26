@@ -16,7 +16,7 @@ function generateColors(count) {
 
 Chart.register(ChartDataLabels);
 // Diagram Lingkaran: Penjualan Barang
-if(window.SalesData){
+if (window.SalesData) {
     const dynamicColors = generateColors(window.SalesData.length);
     const labels = window.SalesData.map(item => item.nama_produk); 
     const data = window.SalesData.map(item => item.terjual); 
@@ -65,65 +65,90 @@ const BarangLarisChart = new Chart(ctx1, {
         }
     }
 })
+} else {
+    // Handle the case when no data is available
+    const chartContainer = document.getElementById('BarangLarisChart').parentElement;
+    chartContainer.innerHTML = '<p class="text-center text-gray-500">No data available</p>';
 };
 
 // Diagram Garis: Total Penjualan per Bulan
-if(window.MonthSales){
-    const thisYearData = Object.values(window.MonthSales.thisYear).map(item => parseFloat(item.total_revenue));
-    const lastYearData = Object.values(window.MonthSales.lastYear).map(item => parseFloat(item.total_revenue));
+if (window.MonthSales) {
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const thisYearData = monthNames.map((month, index) => {
+        const monthKey = (index + 1).toString();
+        //mengecek index single digit dan double digit
+        const data = window.MonthSales.thisYear[monthKey] || window.MonthSales.thisYear[monthKey.padStart(2, '0')];
+        return data ? parseFloat(data.total_revenue) : 0; 
+    });
     
-const ctx2 = document.getElementById('penjualanBulanChart').getContext('2d');
-const penjualanBulanChart = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-        labels: Array.from({ length: 12 }, (_, i) => (i + 1).toString()),
-        datasets: [{
-            label: 'Penjualan Tahun Ini',
-            data: thisYearData,
-            backgroundColor: '#0FADEC',
-            borderColor: '#0FADEC',
-            tension: 0.1
+    const lastYearData = monthNames.map((month, index) => {
+        const monthKey = (index + 1).toString();
+        const data = window.MonthSales.lastYear[monthKey] || window.MonthSales.lastYear[monthKey.padStart(2, '0')];
+        return data ? parseFloat(data.total_revenue) : 0; 
+    });
+
+    console.log(window.MonthSales.thisYear);
+
+    console.log("This Year Sales Data:", thisYearData);
+    console.log("Last Year Sales Data:", lastYearData);
+    
+    // Chart.js configuration
+    const ctx2 = document.getElementById('penjualanBulanChart').getContext('2d');
+    const penjualanBulanChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: monthNames, // Use month names as labels
+            datasets: [
+                {
+                    label: 'Penjualan Tahun Ini',
+                    data: thisYearData,
+                    backgroundColor: '#0FADEC',
+                    borderColor: '#0FADEC',
+                    
+                },
+                {
+                    label: 'Penjualan Tahun Lalu',
+                    data: lastYearData,
+                    backgroundColor: '#E4BF27',
+                    borderColor: '#E4BF27',
+            
+                }
+            ]
         },
-        {
-            label: 'Penjualan Tahun Lalu',
-            data:lastYearData,
-            backgroundColor: '#E4BF27',
-            borderColor: '#E4BF27',
-            tension: 0.1
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        },
-        plugins: {
-            legend: {
-                position: 'bottom',
-                labels: {
-                    usePointStyle: true, 
-                    pointStyle: 'rect',  
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             },
-            tooltip: {
-                callbacks: {
-                    label: function(tooltipItem) {
-                        const revenue = tooltipItem.raw.toLocaleString('id-ID', {
-                            style: 'currency',
-                            currency: 'IDR',
-                            minimumFractionDigits: 0
-                        });
-                        return `${tooltipItem.dataset.label}: ${revenue}`;
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        usePointStyle: true,
+                        pointStyle: 'rect'
                     }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (tooltipItem) {
+                            const revenue = tooltipItem.raw.toLocaleString('id-ID', {
+                                style: 'currency',
+                                currency: 'IDR',
+                                minimumFractionDigits: 0
+                            });
+                            return `${tooltipItem.dataset.label}: ${revenue}`;
+                        }
+                    }
+                },
+                datalabels: {
+                    display: false
                 }
-            },
-            datalabels: {
-                display: false
             }
         }
-    }
-})
-
+    });
 };
+
+

@@ -8,7 +8,7 @@
                 <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
                     style="background-color: #0FADEC;">
                     <div>
-                        <h2 class="text-3xl font-bold">{{$transaksi->total_transaksi}}</h2>
+                        <h2 class="text-3xl font-bold">{{$transaksi->count()}}</h2>
                         <p class="text-sm">Transaksi Hari Ini</p>
                     </div>
                     <div>
@@ -23,7 +23,7 @@
                 <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
                     style="background-color: #E4BF27;">
                     <div>
-                        <h2 class="text-3xl font-bold">Rp {{ number_format($transaksi->total_revenue, 0, ',', '.') }}</h2>
+                        <h2 class="text-3xl font-bold">Rp {{ number_format($transaksi->sum('total_bayar'), 0, ',', '.') }}</h2>
                         <p class="text-sm">Uang Masuk Hari Ini</p>
                     </div>
                     <div>

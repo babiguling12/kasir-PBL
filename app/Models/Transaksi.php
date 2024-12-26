@@ -29,23 +29,20 @@ class Transaksi extends Model
         return $this->hasMany(TransaksiDetail::class);
     }
 
-    public static function getDataSales($dateType, $dateValue = null) {
+    public static function getDataSales($dateValue = null) {
         $query = self::selectRaw("
-            {$dateType}(tanggal) as date_unit, 
+            MONTH(tanggal) as month_unit, 
             SUM(total_bayar) as total_revenue, 
             COUNT(id) as total_transaksi
         ")
-        ->groupByRaw("{$dateType}(tanggal)")
-        ->orderBy('date_unit', 'asc');
-        
-        if ($dateType === 'YEAR') {
-            $query->whereYear('tanggal', $dateValue);
-        } elseif ($dateType === 'DATE') {
-            $query->whereDate('tanggal', $dateValue);
-        }
+        ->groupByRaw("MONTH(tanggal)")
+        ->orderBy('month_unit', 'asc');
     
-        return $query->get()->keyBy('date_unit'); 
+        $query->whereYear('tanggal', $dateValue); 
+    
+        return $query->get()->keyBy('month_unit');
     }
+    
 
     public static function getDataTransaksi($startDate = null, $endDate = null)
         {
