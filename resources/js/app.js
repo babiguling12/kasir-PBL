@@ -17,9 +17,12 @@ function generateColors(count) {
 Chart.register(ChartDataLabels);
 // Diagram Lingkaran: Penjualan Barang
 if (window.SalesData) {
+    
     const dynamicColors = generateColors(window.SalesData.length);
     const labels = window.SalesData.map(item => item.nama_produk); 
     const data = window.SalesData.map(item => item.terjual); 
+
+    console.log(window.SalesData);
 
 const ctx1 = document.getElementById('BarangLarisChart').getContext('2d');
 const BarangLarisChart = new Chart(ctx1, {
@@ -57,9 +60,15 @@ const BarangLarisChart = new Chart(ctx1, {
                     size: 12
                 },
                 formatter: (value, context) => {
-                    let total = context.dataset.data.reduce((acc, val) => acc + val, 0);
-                    let percentage = (value / total * 100).toFixed(2); 
-                    return percentage + '%';  
+                    let valueAsNumber = parseFloat(value);
+                    let total = context.dataset.data.reduce((acc, val) => acc + parseFloat(val), 0);
+                
+                    if (total === 0) {
+                        return '0%';  
+                    }
+                    let percentage = ((valueAsNumber / total) * 100).toFixed(2);
+
+                    return percentage + '%';
                 }
             }
         }
@@ -70,6 +79,8 @@ const BarangLarisChart = new Chart(ctx1, {
     const chartContainer = document.getElementById('BarangLarisChart').parentElement;
     chartContainer.innerHTML = '<p class="text-center text-gray-500">No data available</p>';
 };
+
+
 
 // Diagram Garis: Total Penjualan per Bulan
 if (window.MonthSales) {
@@ -88,17 +99,12 @@ if (window.MonthSales) {
         return data ? parseFloat(data.total_revenue) : 0; 
     });
 
-    console.log(window.MonthSales.thisYear);
-
-    console.log("This Year Sales Data:", thisYearData);
-    console.log("Last Year Sales Data:", lastYearData);
-    
     // Chart.js configuration
     const ctx2 = document.getElementById('penjualanBulanChart').getContext('2d');
     const penjualanBulanChart = new Chart(ctx2, {
         type: 'bar',
         data: {
-            labels: monthNames, // Use month names as labels
+            labels: monthNames, 
             datasets: [
                 {
                     label: 'Penjualan Tahun Ini',
