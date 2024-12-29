@@ -24,7 +24,7 @@ class TransaksiFactory extends Factory
             'tanggal' => $tanggal,
             'total_bayar' => fake()->randomFloat(2, 1000, 1000000),
             'jumlah_uang' => fake()->randomFloat(2, 1000, 1000000),
-            'diskon' => fake()->randomFloat(2, 1000, 1000000),
+            'diskon' => fake()->randomFloat(0, 1000, 1000000),
             'nota' => 'POS'.Carbon::parse($tanggal)->format('Ymd'),
             'kasir_id' => Pengguna::factory(),
             'metode_pembayaran' => fake()->randomElement(['cash', 'transfer']),

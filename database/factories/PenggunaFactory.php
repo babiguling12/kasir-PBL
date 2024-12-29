@@ -22,7 +22,7 @@ class PenggunaFactory extends Factory
             'username' => $username,
             'nama' => fake()->name(),
             'password' => bcrypt($username),
-            'foto' => fake()->imageUrl(),
+            'foto' => "img/profile/default.png",
         ];
     }
 }

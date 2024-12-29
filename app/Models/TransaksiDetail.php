@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class TransaksiDetail extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'transaksi_detail';
     protected $fillable = [
         'transaksi_id',
         'qty',
-        'total_harga_barang',
+        'harga_barang',
         'barcode_id',
     ];
 

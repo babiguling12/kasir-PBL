@@ -22,7 +22,12 @@ class ProductList extends Component
 
     public function pilihProduk($product)
     {
-        $this->dispatch('tambahProduk', $product);
+        if($product['stok'] == 0) {
+            flash()->error('Stok kosong!');
+        }
+        else {
+            $this->dispatch('tambahProduk', $product);
+        }
     }
 
     public function render()

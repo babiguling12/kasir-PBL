@@ -18,7 +18,7 @@ class PenggunaSeeder extends Seeder
             'nama' => 'Admin',
             'password' => bcrypt('admin'),
             'role' => 'admin',
-            'foto' => 'admin.jpg',
+            'foto' => 'img/profile/default.png',
         ]);
 
         Pengguna::create([
@@ -26,7 +26,15 @@ class PenggunaSeeder extends Seeder
             'nama' => 'Owner',
             'password' => bcrypt('owner'),
             'role' => 'owner',
-            'foto' => 'owner.jpg',
+            'foto' => 'img/profile/default.png',
+        ]);
+
+        Pengguna::create([
+            'username' => 'kasir',
+            'nama' => 'Kasirku',
+            'password' => bcrypt('kasir'),
+            'role' => 'kasir',
+            'foto' => 'img/profile/default.png',
         ]);
 
         Pengguna::factory(5)->create();

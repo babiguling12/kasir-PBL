@@ -145,7 +145,7 @@
             </svg>
             Payment Gateway
         </button>
-        <button type="button" {{ ($kembalian < 0) ? 'disabled' : '' }}
+        <button type="button" {{ ($kembalian < 0) ? 'disabled' : '' }} wire:click="cash"
             class="{{ ($kembalian < 0) ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-700 hover:bg-blue-800' }} text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <svg class="w-6 h-6 me-2" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                 width="24px" fill="#ffffff">

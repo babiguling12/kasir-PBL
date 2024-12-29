@@ -51,45 +51,55 @@
                             </tr>
                         </thead>
                         @forelse ($histori_detail as $dtl)
-                            @php
-                                $product = \App\Models\Produk::where('id', $dtl->barcode_id)
-                                    ->latest()
-                                    ->first();
-                            @endphp
-                            <tbody>
-                                <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
+                            @if ($dtl->harga_barang > 0)
+                                @php
+                                    $product = \App\Models\Produk::where('id', $dtl->barcode_id)
+                                        ->latest()
+                                        ->first();
+                                @endphp
+                                <tbody>
+                                    <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
 
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $product ? $product->nama_produk : 'Product Not Found' }}
-                                    </td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $product ? $product->nama_produk : 'Product Not Found' }}
+                                        </td>
 
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    </td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        </td>
 
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Rp
-                                        {{ $product ? number_format($product->harga, 0, ',', '.') : 'Product Not Found' }}
-                                    </td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $dtl->qty }}</td>
-                                    <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">Rp
-                                        {{ number_format($dtl->total_harga_barang, 0, ',', '.') }}</td>
-                                    <div class="flex items-center space-x-4">
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            Rp
+                                            {{ $product ? number_format($product->harga, 0, ',', '.') : 'Product Not Found' }}
+                                        </td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $dtl->qty }}</td>
+                                        <td
+                                            class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            Rp
+                                            {{ number_format($dtl->harga_barang * $dtl->qty, 0, ',', '.') }}</td>
+                                        <div class="flex items-center space-x-4">
 
-                                    </div>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td class="px-4 pt-5 font-medium text-center text-xl text-gray-400 whitespace-nowrap dark:text-white"
-                                        colspan="9" rowspan="10">
-                                        Detail Transaksi Belum Ada
-                                    </td>
-                                </tr>
+                                        </div>
+                                        </td>
+                                    </tr>
+                            @endif
+                        @empty
+                            <tr>
+                                <td class="px-4 pt-5 font-medium text-center text-xl text-gray-400 whitespace-nowrap dark:text-white"
+                                    colspan="9" rowspan="10">
+                                    Detail Transaksi Belum Ada
+                                </td>
+                            </tr>
                         @endforelse
                         </tbody>
 

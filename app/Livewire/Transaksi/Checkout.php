@@ -4,6 +4,7 @@ namespace App\Livewire\Transaksi;
 
 use Livewire\Component;
 use App\Models\Transaksi;
+use Livewire\Attributes\On;
 use Illuminate\Support\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -21,6 +22,7 @@ class Checkout extends Component
     public $jumlah_uang;
     public $kembalian;
     public $nota;
+    public $metode_pembayaran;
 
     public function mount() {
         $this->cart = 'sale';
@@ -32,7 +34,7 @@ class Checkout extends Component
         $this->jumlah_uang = 0;
         $this->kembalian = 0;
 
-        $this->nota = Carbon::parse(now())->format('Ymd') . str_pad(count(Transaksi::all()->where('tanggal', '=', now())) + 1, 4, 0, STR_PAD_LEFT);
+        $this->nota = Carbon::parse(now())->format('Ymd') . str_pad(count(Transaksi::whereDate('created_at', Carbon::today())->get()) + 1, 4, 0, STR_PAD_LEFT);
     }
 
     public function resetCart() {
@@ -119,11 +121,43 @@ class Checkout extends Component
     {
         $this->updatedDiskon();
         $this->updatedJumlahUang();
-        
+
         $cart_items = Cart::instance($this->cart)->content();
 
         return view('livewire.transaksi.product-cart', [
             'cart_items' => $cart_items
         ]);
+    }
+
+    public function cash()
+    {
+        if($this->kembalian < 0) {
+            flash()->error('Uang tidak mencukupi!');
+        }
+        elseif(Cart::instance($this->cart)->countItems() == 0) {
+            flash()->error('Silahkan tambah produk!');
+        }
+        else {
+            $this->dispatch('openModal', component: 'transaksi.konfirmasi-transaksi');
+            $this->metode_pembayaran = 'cash';
+        }
+    }
+
+
+    #[On('transaksiDikonfirmasi')]
+    public function store()
+    {
+        Transaksi::simpanTransaksi([
+            'tanggal' => Carbon::parse(now())->format('Ymd'),
+            'total_bayar' => Cart::instance($this->cart)->totalFloat(),
+            'jumlah_uang' => $this->jumlah_uang,
+            'diskon' => Cart::instance($this->cart)->discountFloat(),
+            'nota' => $this->nota,
+            'metode_pembayaran' => $this->metode_pembayaran,
+
+            'transaksi_details' => Cart::instance($this->cart)->content()
+        ]);
+
+        $this->dispatch('openModal', component: 'transaksi.print-transaksi');
     }
 }

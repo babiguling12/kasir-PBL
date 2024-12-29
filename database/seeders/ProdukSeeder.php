@@ -15,7 +15,7 @@ class ProdukSeeder extends Seeder
      */
     public function run(): void
     {
-        Produk::factory(10)->recycle([
+        Produk::factory(100)->recycle([
             KategoriProduk::all(),
             SatuanProduk::all(),
         ])->create();

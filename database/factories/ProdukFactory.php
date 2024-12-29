@@ -23,10 +23,10 @@ class ProdukFactory extends Factory
             'nama_produk' => fake()->word(),
             'kategori_id' => KategoriProduk::factory(),
             'satuan_id' => SatuanProduk::factory(),
-            'harga' => fake()->randomFloat(2, 1000, 100000),
+            'harga' => (fake()->randomFloat(0, 1, 200) * 1000),
             'stok' => fake()->randomNumber(3, false),
             'terjual' => fake()->randomNumber(3, false),
-            'foto' => fake()->imageUrl(),
+            'foto' => "img/produk/default.png",
         ];
     }
 }

@@ -24,16 +24,26 @@
     </div>
 
     <div class="grid grid-cols-1 gap-3 md:grid-cols-5 mb-5">
-        <div wire:loading.flex class="col-12 absolute justify-center items-center" style="top:0;right:0;left:0;bottom:0;background-color: rgba(255,255,255,0.5);z-index: 99;">
+        <div wire:loading.flex class="col-12 absolute justify-center items-center"
+            style="top:0;right:0;left:0;bottom:0;background-color: rgba(255,255,255,0.5);z-index: 99;">
             <div class="spinner-border text-primary" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
         @forelse ($products as $product)
-            <div wire:click.prevent="pilihProduk({{ $product }})" class="max-w-64 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 cursor-pointer">
+            <div wire:click.prevent="pilihProduk({{ $product }})"
+                class="relative max-w-64 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 cursor-pointer">
+                @if ($product->stok == 0)
+                    <div
+                        class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full top-2 end-2 dark:border-gray-900">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#ffffff">
+                            <path d="M440-400v-360h80v360h-80Zm0 200v-80h80v80h-80Z" />
+                        </svg></div>
+                @endif
                 <div>
-                    <img class="rounded-t-lg aspect-square object-cover"
-                        src="{{ asset('storage/' . $product->foto) }}" alt="{{ $product->nama_produk }}" />
+                    <img class="rounded-t-lg aspect-square object-cover" src="{{ asset('storage/' . $product->foto) }}"
+                        alt="{{ $product->nama_produk }}" />
                 </div>
                 <div class="p-3">
                     <div>
