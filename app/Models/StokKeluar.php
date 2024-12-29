@@ -54,10 +54,8 @@ class StokKeluar extends Model
 
                 if($produk->stok >= $stokKeluar->jumlah) {
                     $produk->decrement('stok', $stokKeluar->jumlah);
-                } else {
-                    $produk->stok = 0;
-                    $produk->save();
-                }
+                } 
+                
             });
         }
 }

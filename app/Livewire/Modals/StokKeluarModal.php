@@ -21,7 +21,13 @@ class StokKeluarModal extends ModalComponent
     }
 
     public function save() {
-        $this->form->tambahData();
+        $produk = Produk::findOrFail($this->form->produk);
+
+        if($produk->stok >= $this->form->jumlah) {
+            $this->form->tambahData();
+        } else {
+            flash()->error('Gagal menambahkan stok keluar. Stok produk tidak mencukupi.');
+        }
 
         $this->closeModal();
         $this->dispatch('refresh');
