@@ -33,21 +33,22 @@ class Transaksi extends Model
         return $this->hasMany(TransaksiDetail::class);
     }
 
-    public static function getDataSales($dateValue = null) {
+    public static function getDataSales($dateValue = null)
+    {
         $query = self::selectRaw("
             MONTH(tanggal) as month_unit,
             SUM(total_bayar) as total_revenue,
             COUNT(id) as total_transaksi
         ")
-        ->groupByRaw("MONTH(tanggal)")
-        ->orderBy('month_unit', 'asc');
+            ->groupByRaw("MONTH(tanggal)")
+            ->orderBy('month_unit', 'asc');
         $query->whereYear('tanggal', $dateValue);
         return $query->get()->keyBy('month_unit');
     }
 
     public static function getDataTransaksi($startDate = null, $endDate = null)
     {
-        $query = Self::query();
+        $query = self::query();
         if ($startDate && !$endDate) {
             $query->where('tanggal', '>=', $startDate);
         }
@@ -63,7 +64,7 @@ class Transaksi extends Model
 
     public static function getRiwayat($search)
     {
-        return Self::where('nota', 'like', '%' . $search . '%')
+        return self::where('nota', 'like', '%' . $search . '%')
             ->latest()->paginate(10);
     }
 
@@ -88,13 +89,13 @@ class Transaksi extends Model
                     'barcode_id' => $transaksi_detail->id,
                 ]);
 
-                Produk::find($transaksi_detail->id)
-                ->update([
-                    'stok' => $transaksi_detail->options->stock - $transaksi_detail->qty
-                ]);
+                Produk::findOrFail($transaksi_detail->id)
+                    ->update([
+                        'stok' => $transaksi_detail->options->stock - $transaksi_detail->qty
+                    ]);
             }
 
-            if($data['diskon'] > 0) {
+            if ($data['diskon'] > 0) {
                 $transaksi->transaksi_detail()->create([
                     'qty' => 1,
                     'harga_barang' => -1 * $data['diskon'],
@@ -102,6 +103,15 @@ class Transaksi extends Model
                 ]);
             }
         }, 5);
+
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = '<your server key>';
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
 
         return Transaksi::latest()->first()->id;
 

@@ -138,7 +138,7 @@ class Checkout extends Component
             flash()->error('Silahkan tambah produk!');
         }
         else {
-            $this->dispatch('openModal', component: 'transaksi.konfirmasi-transaksi');
+            $this->dispatch('openModal', component: 'transaksi.konfirmasi-transaksi', arguments: ["print" => false]);
             $this->metode_pembayaran = 'cash';
         }
     }
@@ -158,6 +158,9 @@ class Checkout extends Component
             'transaksi_details' => Cart::instance($this->cart)->content()
         ]);
 
-        $this->dispatch('openModal', component: 'transaksi.print-transaksi');
+        sleep(1);
+        
+        $this->dispatch('openModal', component: 'transaksi.konfirmasi-transaksi', arguments: ["print" => true]);
+        // $this->dispatch('openModal', component: 'transaksi.print-transaksi');
     }
 }
