@@ -37,11 +37,17 @@
                         <td class="px-3 py-4">
 
                             <div class="relative flex items-center">
-                                <input type="number" wire:model="quantity.{{ $cart_item->id }}" class="flex-shrink-0 text-gray-900 dark:text-white border-0 bg-transparent text-sm font-normal pe-0 text-right focus:outline-none focus:ring-0 max-w-[4rem] text-center" placeholder="" value="{{ $cart_item->qty }}" required />
+                                <input type="number" wire:model="quantity.{{ $cart_item->id }}"
+                                    class="flex-shrink-0 text-gray-900 dark:text-white border-0 bg-transparent text-sm font-normal pe-0 text-right focus:outline-none focus:ring-0 max-w-[4rem] text-center"
+                                    placeholder="" value="{{ $cart_item->qty }}" required />
 
-                                <button type="button" wire:click="updateQuantity('{{ $cart_item->rowId }}', {{ $cart_item->id }})" class="flex-shrink-0 bg-blue-600 hover:bg-blue-700 inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
-                                    <svg class="w-2.5 h-2.5 text-gray-900 dark:text-white" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffff" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                        <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+                                <button type="button"
+                                    wire:click="updateQuantity('{{ $cart_item->rowId }}', {{ $cart_item->id }})"
+                                    class="flex-shrink-0 bg-blue-600 hover:bg-blue-700 inline-flex items-center justify-center border border-gray-300 rounded-md h-5 w-5 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                    <svg class="w-2.5 h-2.5 text-gray-900 dark:text-white" height="24px"
+                                        viewBox="0 -960 960 960" width="24px" fill="#ffffff" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                        <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z" />
                                     </svg>
                                 </button>
                             </div>
@@ -83,7 +89,7 @@
                         Diskon ({{ $diskon }}%)
                     </th>
                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        (-) Rp {{ (Cart::instance($cart)->discount()) }}
+                        (-) Rp {{ Cart::instance($cart)->discount() }}
                     </td>
                 </tr>
                 <tr class="bg-white border-y text-blue-600 dark:bg-gray-800 dark:border-gray-700">
@@ -91,7 +97,7 @@
                         Total Bayar
                     </th>
                     <td class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
-                        (=) Rp {{ (Cart::instance($cart)->total()) }}
+                        (=) Rp {{ Cart::instance($cart)->total() }}
                     </td>
                 </tr>
                 <tr class="bg-white border-y dark:bg-gray-800 dark:border-gray-700">
@@ -136,7 +142,7 @@
             </svg>
             Reset
         </button>
-        <button type="button" id="pay-button"
+        <button type="button" wire:click="paymentGateway"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center me-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <svg class="w-6 h-6 me-2" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                 width="24px" fill="#ffffff">
@@ -145,8 +151,8 @@
             </svg>
             Payment Gateway
         </button>
-        <button type="button" {{ ($kembalian < 0) ? 'disabled' : '' }} wire:click="cash"
-            class="{{ ($kembalian < 0) ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-700 hover:bg-blue-800' }} text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <button type="button" {{ $kembalian < 0 ? 'disabled' : '' }} wire:click="cash"
+            class="{{ $kembalian < 0 ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-700 hover:bg-blue-800' }} text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             <svg class="w-6 h-6 me-2" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
                 width="24px" fill="#ffffff">
                 <path

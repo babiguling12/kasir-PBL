@@ -178,7 +178,7 @@
                     <ul id="dropdown-laporan" class="{{ request()->is('histori', 'laporan') ? '' : 'hidden' }} py-2 space-y-2">
                         <li>
                             <a href="{{ route('page.histori') }}"
-                                class="{{ request()->is('histori') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 pl-11 text-base font-medium  rounded-lg  group">Histori
+                                class="{{ request()->is('historigit pu') ? 'text-white bg-blue-700' : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700' }} flex items-center p-2 pl-11 text-base font-medium  rounded-lg  group">Histori
                                 Transaksi</a>
                         </li>
                         <li>

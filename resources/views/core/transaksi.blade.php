@@ -21,13 +21,17 @@
         </div>
     </section>
 
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
     <script type="text/javascript">
-        // For example trigger on button clicked, or any time you need
-        var payButton = document.getElementById('pay-button');
-        payButton.addEventListener('click', function () {
-          // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-          window.snap.pay('TRANSACTION_TOKEN_HERE');
-          // customer will be redirected after completing payment pop-up
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('openPaymentGateway', (event) => {
+                let snapToken = event.snapToken
+                window.snap.pay(snapToken, {
+                    onSuccess: function(result) {
+                        Livewire.dispatch('transaksiDikonfirmasi');
+                    }
+                });
+            })
         });
-      </script>
+    </script>
 </x-app-layout>

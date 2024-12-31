@@ -23,8 +23,10 @@ class Checkout extends Component
     public $kembalian;
     public $nota;
     public $metode_pembayaran;
+    public $snap_token;
 
-    public function mount() {
+    public function mount()
+    {
         $this->cart = 'sale';
         $this->diskon = 0;
         $this->quantity = [];
@@ -33,11 +35,13 @@ class Checkout extends Component
         $this->totalbayar = 0;
         $this->jumlah_uang = 0;
         $this->kembalian = 0;
+        $this->snap_token = 0;
 
         $this->nota = Carbon::parse(now())->format('Ymd') . str_pad(count(Transaksi::whereDate('created_at', Carbon::today())->get()) + 1, 4, 0, STR_PAD_LEFT);
     }
 
-    public function resetCart() {
+    public function resetCart()
+    {
         Cart::instance($this->cart)->destroy();
         $this->mount();
     }
@@ -72,11 +76,10 @@ class Checkout extends Component
         $this->stok[$produk['id']] = $produk['stok'];
         $this->quantity[$produk['id']] = 1;
         $this->totalbayar = $this->hitungTotal();
-
-
     }
 
-    public function updateQuantity($row_id, $product_id) {
+    public function updateQuantity($row_id, $product_id)
+    {
         if ($this->stok[$product_id] < $this->quantity[$product_id]) {
             flash()->warning('Stok tidak cukup.');
 
@@ -98,7 +101,7 @@ class Checkout extends Component
 
     public function updatedJumlahUang()
     {
-        if(!$this->jumlah_uang || $this->jumlah_uang < 0) $this->jumlah_uang = 0;
+        if (!$this->jumlah_uang || $this->jumlah_uang < 0) $this->jumlah_uang = 0;
         $this->kembalian = (int)($this->jumlah_uang - Cart::instance($this->cart)->totalFloat());
     }
 
@@ -107,14 +110,16 @@ class Checkout extends Component
         return Cart::instance($this->cart)->total();
     }
 
-    public function removeItem($row_id) {
+    public function removeItem($row_id)
+    {
         Cart::instance($this->cart)->remove($row_id);
     }
 
-    public function updatedDiskon() {
-        if(!$this->diskon || $this->diskon < 0) $this->diskon = 0;
-        if($this->diskon > 100) $this->diskon = 100;
-        Cart::instance($this->cart)->setGlobalDiscount((integer)$this->diskon);
+    public function updatedDiskon()
+    {
+        if (!$this->diskon || $this->diskon < 0) $this->diskon = 0;
+        if ($this->diskon > 100) $this->diskon = 100;
+        Cart::instance($this->cart)->setGlobalDiscount((int)$this->diskon);
     }
 
     public function render()
@@ -131,15 +136,44 @@ class Checkout extends Component
 
     public function cash()
     {
-        if($this->kembalian < 0) {
+        if ($this->kembalian < 0) {
             flash()->error('Uang tidak mencukupi!');
-        }
-        elseif(Cart::instance($this->cart)->countItems() == 0) {
+        } elseif (Cart::instance($this->cart)->countItems() == 0) {
             flash()->error('Silahkan tambah produk!');
-        }
-        else {
+        } else {
             $this->dispatch('openModal', component: 'transaksi.konfirmasi-transaksi', arguments: ["print" => false]);
             $this->metode_pembayaran = 'cash';
+        }
+    }
+
+    public function paymentGateway()
+    {
+        if (Cart::instance($this->cart)->countItems() == 0) {
+            flash()->error('Silahkan tambah produk!');
+        } else {
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = config('midtrans.server_key');
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = config('midtrans.is_production');
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
+
+
+
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $this->nota,
+                    'gross_amount' => (int)Cart::instance($this->cart)->totalFloat(),
+                ),
+            );
+
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            $this->snap_token = $snapToken;
+            $this->metode_pembayaran = 'transfer';
+
+            $this->dispatch('openPaymentGateway', snapToken: $snapToken);
         }
     }
 
@@ -154,12 +188,13 @@ class Checkout extends Component
             'diskon' => Cart::instance($this->cart)->discountFloat(),
             'nota' => $this->nota,
             'metode_pembayaran' => $this->metode_pembayaran,
+            'snap_token' => $this->snap_token,
 
             'transaksi_details' => Cart::instance($this->cart)->content()
         ]);
 
         sleep(1);
-        
+
         $this->dispatch('openModal', component: 'transaksi.konfirmasi-transaksi', arguments: ["print" => true]);
         // $this->dispatch('openModal', component: 'transaksi.print-transaksi');
     }

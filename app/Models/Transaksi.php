@@ -20,7 +20,8 @@ class Transaksi extends Model
         'diskon',
         'nota',
         'kasir_id',
-        'metode_pembayaran'
+        'metode_pembayaran',
+        'snap_token',
     ];
 
     public function kasir(): BelongsTo
@@ -80,6 +81,7 @@ class Transaksi extends Model
                 'nota' => $data['nota'],
                 'kasir_id' => auth()->user()->id,
                 'metode_pembayaran' => $data['metode_pembayaran'],
+                'snap_token' => $data['snap_token'],
             ]);
 
             foreach ($data['transaksi_details'] as $transaksi_detail) {
@@ -89,10 +91,8 @@ class Transaksi extends Model
                     'barcode_id' => $transaksi_detail->id,
                 ]);
 
-                Produk::findOrFail($transaksi_detail->id)
-                    ->update([
-                        'stok' => $transaksi_detail->options->stock - $transaksi_detail->qty
-                    ]);
+                Produk::findOrFail($transaksi_detail->id)->decrement('stok', $transaksi_detail->qty);
+                Produk::findOrFail($transaksi_detail->id)->increment('terjual', $transaksi_detail->qty);
             }
 
             if ($data['diskon'] > 0) {
@@ -103,17 +103,6 @@ class Transaksi extends Model
                 ]);
             }
         }, 5);
-
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = '<your server key>';
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
-
-        return Transaksi::latest()->first()->id;
 
     }
 }
