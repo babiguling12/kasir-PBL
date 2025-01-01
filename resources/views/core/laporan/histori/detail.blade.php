@@ -6,7 +6,7 @@
         <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <div class="flex justify-between items-center pb-4 mb-4 rounded-t border-b sm:mb-5 dark:border-gray-600">
                 <h3 class="titleModal text-lg font-semibold text-gray-900 dark:text-white">Detail Transaksi</h3>
-                <button type="button" aria-controls="drawer-update-product"
+                <button type="button" onclick="window.location.href = '{{ route('page.transaksi.struk', $histori->id)}}'" aria-controls="drawer-update-product"
                     class="py-2 px-3 flex items-center text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="h-4 w-4 mr-2 -ml-0.5">

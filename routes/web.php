@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function (){
 
     //transaksi
     Route::get('transaksi',[TransaksiController::class,'index'])->name('page.transaksi')->middleware('isCore');
+    Route::get('transaksi/struk/{id}', [TransaksiController::class, 'struk'])->name('page.transaksi.struk')->middleware('isCore');
 
     Route::get('logout', LogoutController::class)->name('logout');
 

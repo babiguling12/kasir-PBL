@@ -18,6 +18,8 @@ class TransaksiDetail extends Model
         'barcode_id',
     ];
 
+    protected $with = ['transaksi', 'produk'];
+
     public function transaksi(): BelongsTo {
         return $this->belongsTo(Transaksi::class);
     }

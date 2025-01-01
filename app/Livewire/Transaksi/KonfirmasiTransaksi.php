@@ -18,7 +18,7 @@ class KonfirmasiTransaksi extends ModalComponent
     public function printstruk()
     {
         $this->closeModal();
-        return to_route('page.transaksi.detail', ['id' => Transaksi::latest()->first()->id]);
+        return to_route('page.transaksi.struk', ['id' => Transaksi::latest()->first()->id]);
     }
 
     public static function destroyOnClose(): bool
