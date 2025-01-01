@@ -37,7 +37,7 @@ class Checkout extends Component
         $this->kembalian = 0;
         $this->snap_token = 0;
 
-        $this->nota = Carbon::parse(now())->format('Ymd') . str_pad(count(Transaksi::whereDate('created_at', Carbon::today())->get()) + 1, 4, 0, STR_PAD_LEFT);
+        $this->nota = Carbon::parse(now())->format('Ymd') . str_pad(count(Transaksi::whereDate('created_at', Carbon::today())->get()) + 1, 4, 0, STR_PAD_LEFT) . rand(1,9);
     }
 
     public function resetCart()

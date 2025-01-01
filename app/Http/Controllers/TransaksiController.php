@@ -11,6 +11,6 @@ class TransaksiController extends Controller
     {
         Cart::instance('sale')->destroy();
 
-        return view('core.transaksi');
+        return view('kasir.transaksi');
     }
 }

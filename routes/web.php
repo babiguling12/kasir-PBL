@@ -64,7 +64,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('laporan', [LaporanController::class, 'all_laporan'])->name('page.laporankeseluruhan')->middleware('isKasir');
 
     //transaksi
-    Route::get('transaksi',[TransaksiController::class,'index'])->name('page.transaksi');
+    Route::get('transaksi',[TransaksiController::class,'index'])->name('page.transaksi')->middleware('isCore');
 
     Route::get('logout', LogoutController::class)->name('logout');
 
