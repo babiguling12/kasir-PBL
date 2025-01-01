@@ -104,6 +104,33 @@
                         </tbody>
 
                     </table>
+                    <div class="flex justify-end mt-6 pr-8">
+                        <div class="w-full max-w-md bg-white border rounded-lg shadow-sm p-6 text-gray-900 dark:bg-gray-800 dark:text-gray-300">
+                            <div class="flex justify-between border-b pb-4 text-base font-semibold">
+                                <span>Total Harga</span>
+                                <span>Rp {{number_format($histori->total_bayar + $histori->diskon, 0, ',', '.')}}</span>
+                            </div>
+                            <div class="flex justify-between border-b py-4 text-base font-semibold">
+                                <span>Diskon</span>
+                                <span>Rp {{number_format($histori->diskon, 0, ',', '.')}}</span>
+                            </div>
+                            <div class="flex justify-between border-b py-4 text-base font-semibold">
+                                <span>Total Bayar</span>
+                                <span>Rp {{number_format($histori->total_bayar, 0, ',', '.')}}</span>
+                            </div>
+                            @if ($histori->metode_pembayaran == 'cash')
+                            <div class="flex justify-between border-b py-4 text-base font-semibold">
+                                <span>Tunai</span>
+                                <span>Rp {{number_format($histori->jumlah_uang, 0, ',', '.')}}</span>
+                            </div>
+                            <div class="flex justify-between pt-4 text-base font-semibold">
+                                <span>Kembalian</span>
+                                <span>Rp {{number_format($histori->jumlah_uang-$histori->total_bayar, 0, ',', '.')}}</span>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
