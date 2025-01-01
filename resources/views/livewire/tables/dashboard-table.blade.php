@@ -38,7 +38,7 @@
                 <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
                     style="background-color: #E81810;">
                     <div>
-                        <h2 class="text-3xl font-bold">{{ $stokMasuk->total_stokmasuk}}</h2>
+                        <h2 class="text-3xl font-bold">{{ $stokMasuk->sum('total_stokmasuk') }}</h2>
                         <p class="text-sm">Stok Masuk Hari Ini</p>
                     </div>
                     <div>
@@ -55,7 +55,6 @@
             {{-- Diagram --}}
             
             <script>
-              window.SalesData = @json($SalesData);
               window.MonthSales = @json([
                 'thisYear' => $thisYearSales,
                 'lastYear' => $lastYearSales
@@ -98,6 +97,7 @@
                     </div>
                     <div class="w-full h-full">
                         <canvas id="BarangLarisChart"></canvas>
+                       
                     </div>
                 </div>
 

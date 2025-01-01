@@ -16,69 +16,86 @@ function generateColors(count) {
 
 Chart.register(ChartDataLabels);
 // Diagram Lingkaran: Penjualan Barang
-if (window.SalesData) {
-    
-    const dynamicColors = generateColors(window.SalesData.length);
-    const labels = window.SalesData.map(item => item.nama_produk); 
-    const data = window.SalesData.map(item => item.terjual); 
 
-    console.log(window.SalesData);
+Livewire.on('filter-changed', (event) => {
+    const salesData = event.salesData;
 
-const ctx1 = document.getElementById('BarangLarisChart').getContext('2d');
-const BarangLarisChart = new Chart(ctx1, {
-    type: 'pie',
-    data: {
-        datasets: [{
-            data: data,
-            backgroundColor: dynamicColors,
-            borderColor: dynamicColors.map(() => '#fff'),
-            borderWidth: 1
-        }],
-        labels: labels
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'bottom',
-                labels: {
-                    usePointStyle: true,  
-                }
+    console.log('Sales Data:', salesData.length);
+    if (salesData && salesData.length > 0) {
+        const dynamicColors = generateColors(salesData.length);
+
+        // sorting top 5
+        const sortedSalesData = salesData
+            .sort((a, b) => b.terjual - a.terjual)
+            .slice(0, 5); 
+
+        const labels = sortedSalesData.map(item => item.nama_produk);
+        const data = sortedSalesData.map(item => item.terjual);
+
+        const ctx1 = document.getElementById('BarangLarisChart').getContext('2d');
+
+        // If a chart already exists, destroy it
+        if (window.BarangLarisChart instanceof Chart) {
+            window.BarangLarisChart.destroy();
+        }
+
+        window.BarangLarisChart = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: data,
+                    backgroundColor: dynamicColors,
+                    borderColor: dynamicColors.map(() => '#fff'),
+                    borderWidth: 1
+                }],
+                labels: labels
             },
-            tooltip: {
-                callbacks: {
-                    label: function(tooltipItem) {
-                        return tooltipItem.label + ': ' + tooltipItem.raw + ' unit';
-                    }
-                }
-            },
-            datalabels: {
-                color: 'white',
-                display: true,
-                font: {
-                    weight: 'bold',
-                    size: 12
-                },
-                formatter: (value, context) => {
-                    let valueAsNumber = parseFloat(value);
-                    let total = context.dataset.data.reduce((acc, val) => acc + parseFloat(val), 0);
-                
-                    if (total === 0) {
-                        return '0%';  
-                    }
-                    let percentage = ((valueAsNumber / total) * 100).toFixed(2);
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + ' unit';
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: 'white',
+                        display: true,
+                        font: {
+                            weight: 'bold',
+                            size: 12
+                        },
+                        formatter: (value, context) => {
+                            let valueAsNumber = parseFloat(value);
+                            let total = context.dataset.data.reduce((acc, val) => acc + parseFloat(val), 0);
 
-                    return percentage + '%';
+                            if (total === 0) {
+                                return '0%';
+                            }
+                            let percentage = ((valueAsNumber / total) * 100).toFixed(2);
+
+                            return percentage + '%';
+                        }
+                    }
                 }
             }
+        });
+    } else if (salesData.length === 0) {
+        const chartContainer = document.getElementById('BarangLarisChart').parentElement;
+        if (chartContainer) {
+            chartContainer.innerHTML = '<p class="text-center text-gray-500">No data available</p>';
         }
     }
-})
-} else {
-    // Handle the case when no data is available
-    const chartContainer = document.getElementById('BarangLarisChart').parentElement;
-    chartContainer.innerHTML = '<p class="text-center text-gray-500">No data available</p>';
-};
+});
+
 
 
 

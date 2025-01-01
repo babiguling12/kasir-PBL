@@ -25,9 +25,9 @@ class LaporanKasirTable extends Component
     #[On('refresh')]
     public function refresh() {}
 
-    protected $listeners = ['refreshData' => 'refresh_Data'];
+    protected $listeners = ['refreshData'];
 
-    public function refresh_Data($startDate, $endDate)
+    public function refreshData($startDate, $endDate)
     {
         $this->startDate = $startDate;
         $this->endDate = $endDate;
