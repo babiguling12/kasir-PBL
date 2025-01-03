@@ -79,8 +79,8 @@
                             {{ $produk->satuan->nama_satuan }}</td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $produk->kategori->nama_kategori }}</td>
-                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">Rp
-                            {{ number_format($produk->harga, 0, ',', '.') }}</td>
+                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            @currency($produk->harga)</td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $produk->stok }}</td>
                         <td class="px-4 py-3 font-medium text-gray-900 text-center whitespace-nowrap dark:text-white">

@@ -25,9 +25,8 @@
                     <tr>
                         <td>{{ $detail->produk->nama_produk ?? '---' }}</td>
                         <td class="text-center">{{ $detail->qty ?? 0 }}</td>
-                        <td class="text-right whitespace-nowrap">Rp {{ number_format($detail->harga_barang, 0, ',', '.') }}</td>
-                        <td class="text-right whitespace-nowrap">Rp {{ number_format($detail->qty * $detail->harga_barang, 0, ',', '.') }}
-                        </td>
+                        <td class="text-right whitespace-nowrap">@currency($detail->harga_barang)</td>
+                        <td class="text-right whitespace-nowrap">@currency($detail->qty * $detail->harga_barang)</td>
                     </tr>
                 @endif
             @endforeach
@@ -36,7 +35,7 @@
     <hr class="my-2" />
     <div class="flex justify-between text-sm">
         <span><strong>Total Bayar:</strong></span>
-        <span class="font-bold">Rp {{ number_format($histori->total_bayar, 0, ',', '.') }}</span>
+        <span class="font-bold">@currency($histori->total_bayar ?? 0)</span>
     </div>
     <hr class="my-2" />
     <p class="text-center text-xs mt-4">Password Wifi : belanjaduluyuk</p>

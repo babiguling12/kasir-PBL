@@ -70,7 +70,7 @@
                             @php
                                 $terjual=$produk_terjual->where('barcode_id', $produk->id)->sum('qty');
                             @endphp
-                            Rp {{ number_format($produk->harga * $terjual, 0, ',', '.') }}</td>
+                            @currency($produk->harga * $terjual)</td>
                         <td class="px-4 py-3"></td>
                         <td class="px-4 py-3 font-medium place-items-end text-gray-900 whitespace-nowrap dark:text-white">
                         </td>

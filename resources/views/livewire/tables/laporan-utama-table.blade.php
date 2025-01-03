@@ -66,7 +66,7 @@
             <div class=" text-white rounded-lg flex justify-between items-center p-4 shadow-md"
                 style="background-color: #E4BF27;">
                 <div>
-                    <h2 class="text-3xl font-bold">Rp {{ number_format($transaksi->sum('total_bayar'), 0, ',', '.') }}</h2>
+                    <h2 class="text-3xl font-bold">@currency($transaksi->sum('total_bayar'))</h2>
                     <p class="text-sm">Total Uang Masuk</p>
                 </div>
                 <div>

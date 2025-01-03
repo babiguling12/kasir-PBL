@@ -32,7 +32,7 @@
                         <th scope="col" class="p-4">Tanggal</th>
                         <th scope="col" class="p-4">Invoice</th>
                         <th scope="col" class="p-4">Total Bayar</th>
-                        <th scope="col" class="p-4">Dibayar</th>
+                        <th scope="col" class="p-4">Jumlah Uang</th>
                         <th scope="col" class="p-4">Diskon</th>
                         <th scope="col" class="p-4"></th>
                         <th scope="col" class="p-4"></th>
@@ -51,9 +51,9 @@
                         </td>
                         <td scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $transaksi->tanggal }}</td>
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $transaksi->nota }}</td>
-                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">Rp {{ number_format($transaksi->total_bayar, 0, ',', '.' ) }}</td>
-                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">Rp {{ number_format($transaksi->jumlah_uang, 0, ',', '.' ) }}</td>
-                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">Rp {{ number_format($transaksi->diskon, 0, ',', '.') }}</td>
+                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">@currency($transaksi->total_bayar)</td>
+                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">@currency($transaksi->jumlah_uang)</td>
+                        <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">@currency($transaksi->diskon)</td>
                         
                         <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white"></td>
                         <td class="px-4 py-3"></td>
