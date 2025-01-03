@@ -27,7 +27,7 @@ class Produk extends Model
 
 
     public function transaksi_detail(): HasMany {
-        return $this->hasMany(TransaksiDetail::class, 'barcode_id');
+        return $this->hasMany(TransaksiDetail::class, 'barcode_id',);
     }
 
     public function satuan(): BelongsTo {

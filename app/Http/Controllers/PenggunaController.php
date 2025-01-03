@@ -29,27 +29,27 @@ class PenggunaController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            'nama' => 'required|string|max:255',
-            'username' => 'required|string|unique:pengguna,username|max:255',
-            'password' => 'required|string|min:8',
-            'profile' => 'required|image|mimes:jpeg,jpg,png|max:2048',
-        ]);
+        // $validate = $request->validate([
+        //     'nama' => 'required|string|max:255',
+        //     'username' => 'required|string|unique:pengguna,username|max:255',
+        //     'password' => 'required|string|min:8',
+        //     'profile' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+        // ]);
 
-        $profilePath = null;
-        if($request->hasFile('profile')) {
-            $profilePath = $request->file('profile')->store('img', 'public');
-        }
+        // $profilePath = null;
+        // if($request->hasFile('profile')) {
+        //     $profilePath = $request->file('profile')->store('img', 'public');
+        // }
 
-        Pengguna::create([
-            'nama' => $request->nama,
-            'username' => $request->username,
-            'password' => bcrypt($request->password),
-            'foto' => $request->profile,
-        ]);
+        // Pengguna::create([
+        //     'nama' => $request->nama,
+        //     'username' => $request->username,
+        //     'password' => bcrypt($request->password),
+        //     'foto' => $request->profile,
+        // ]);
 
-        flash()->success('Pengguna berhasil ditambahkan');
-        return redirect()->route('page.pengguna');
+        // flash()->success('Pengguna berhasil ditambahkan');
+        // return redirect()->route('page.pengguna');
     }
 
     /**

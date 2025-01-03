@@ -105,7 +105,7 @@
 
                     </table>
                     <div class="flex justify-end mt-6 pr-8">
-                        <div class="w-full max-w-md bg-white border rounded-lg shadow-sm p-6 text-gray-900 dark:bg-gray-800 dark:text-gray-300">
+                        <div class="w-full max-w-md bg-white p-6 text-gray-900 dark:bg-gray-800 dark:text-gray-300">
                             <div class="flex justify-between border-b pb-4 text-base font-semibold">
                                 <span>Total Harga</span>
                                 <span>Rp {{number_format($histori->total_bayar + $histori->diskon, 0, ',', '.')}}</span>

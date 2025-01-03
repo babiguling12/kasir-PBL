@@ -20,7 +20,6 @@ class TransaksiController extends Controller
         $transaction = Transaksi::find($id);
         $histori_detail = TransaksiDetail::where('transaksi_id', $id)->latest()->get();
         
-
         if (!$transaction) {
             return redirect()->route('page.histori')->with('error', 'Transaction not found.');
         }
