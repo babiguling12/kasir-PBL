@@ -22,19 +22,27 @@
         <tbody>
             @foreach ($histori_detail as $detail)
                 @if ($detail->harga_barang > 0)
-                    <tr>
-                        <td>{{ $detail->produk->nama_produk ?? '---' }}</td>
-                        <td class="text-center">{{ $detail->qty ?? 0 }}</td>
-                        <td class="text-right whitespace-nowrap">@currency($detail->harga_barang)</td>
-                        <td class="text-right whitespace-nowrap">@currency($detail->qty * $detail->harga_barang)</td>
+                    <tr class="border-b dark:border-gray-600">
+                        <td class="py-2">{{ $detail->produk->nama_produk ?? '---' }}</td>
+                        <td class="text-center py-2">{{ $detail->qty ?? 0 }}</td>
+                        <td class="text-right py-2 pr-4">@currency($detail->harga_barang)</td>
+                        <td class="text-right py-2 pr-4">@currency($detail->qty * $detail->harga_barang)</td>
                     </tr>
                 @endif
             @endforeach
         </tbody>
     </table>
     <hr class="my-2" />
-    <div class="flex justify-between text-sm">
-        <span><strong>Total Bayar:</strong></span>
+    <div class="flex justify-between text-sm mb-2">
+        <span><strong>Sub Total:</strong></span>
+        <span class="font-bold">@currency(($histori->total_bayar ?? 0) + ($histori->diskon ?? 0))</span>
+    </div>
+    <div class="flex justify-between text-sm mb-2">
+        <span><strong>Diskon:</strong></span>
+        <span class="font-bold">@currency($histori->diskon ?? 0)</span>
+    </div>
+    <div class="flex justify-between text-sm mb-4">
+        <span><strong>Grand Total:</strong></span>
         <span class="font-bold">@currency($histori->total_bayar ?? 0)</span>
     </div>
     <hr class="my-2" />
