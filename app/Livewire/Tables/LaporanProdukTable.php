@@ -17,7 +17,7 @@ class LaporanProdukTable extends Component
 
     public $startDate, $endDate, $search;
 
-    protected $queryString = ['search', 'startDate', 'endDate'];
+    protected $queryString = ['startDate', 'endDate'];
     public function updatingSearch() {
         
         $this->resetPage();

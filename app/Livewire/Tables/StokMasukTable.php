@@ -14,7 +14,7 @@ class StokMasukTable extends Component
 
     public $search;
 
-    protected $queryString = ['search'];
+
 
     public function updatingSearch() {
         $this->resetPage();

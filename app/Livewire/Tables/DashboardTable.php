@@ -15,7 +15,7 @@ class DashboardTable extends Component
 
     use WithPagination;
 
-    public $filter='Filter Data';
+    public $filter='All Time';
     public $startDate;
    
 
@@ -79,6 +79,14 @@ class DashboardTable extends Component
         $thisYearSales = Transaksi::getDataSales($currentYear);
         $transaksi = Transaksi::getDataTransaksi($currentDate);
         $stokMasuk = StokMasuk::getStokMasuk($currentDate);
+
+       
+        $salesData = TransaksiDetail::join('produk', 'produk.id', '=', 'transaksi_detail.barcode_id')
+            ->selectRaw('produk.nama_produk, SUM(transaksi_detail.qty) as terjual')
+            ->groupBy('produk.id')
+            ->get();
+
+        $this->dispatch('filter-changed', salesData: $salesData);
 
         return view('livewire.tables.dashboard-table', [
             'filter'=>$this->filter,
