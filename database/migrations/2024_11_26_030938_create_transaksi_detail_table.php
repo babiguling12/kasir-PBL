@@ -22,7 +22,8 @@ return new class extends Migration
             $table->foreignId('barcode_id')->constrained(
                 table: 'produk',
                 indexName: 'transaksi_detail_barcode_id_foreign'
-            )->onDelete('cascade')->onUpdate('cascade');
+            )->noActionOnDelete()
+            ->noActionOnUpdate();
             $table->timestamps();
         });
     }

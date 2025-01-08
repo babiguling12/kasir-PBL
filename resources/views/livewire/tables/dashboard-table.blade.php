@@ -63,12 +63,13 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 mb-4">
                 <!-- Diagram Lingkaran: Penjualan Barang -->
                 <div class="bg-white md:col-span-1 p-4 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold mb-4">Barang Terlaris</h2>
-                    <div class="flex items-center lg:order-2">
+                    
+                    <div class="flex items-center lg:order-2 justify-between">
+                        <h2 class="text-xl font-semibold mb-4">Barang Terlaris</h2>
                         <button type="button"
-                            class="flex text-smtext-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                            class="flex  text-smtext-base font-medium text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                             id="filter" aria-expanded="false" data-dropdown-toggle="dropdown-filter">
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap">{{$filter}}</span>
+                            <span class="flex-1 ml-3  text-left whitespace-nowrap">{{$filter}}</span>
                             <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -77,24 +78,25 @@
                             </svg>
                         </button>
                         <!-- Dropdown menu -->
-                        <div class="hidden my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
+                        <div class="hidden  my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 rounded-xl"
                             style="z-index: 9" id="dropdown-filter">
                             <ul class="py-1 text-gray-700 dark:text-gray-300" aria-labelledby="dropdown-filter">
                                 <li>
                                     <a class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    wire:click="filterMonth">Bulan Ini</a>
+                                    wire:click="filterData('thisMonth')">Bulan Ini</a>
                                 </li>
                                 <li>
                                     <a class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    wire:click="filterYear">Tahun Ini</a>
+                                    wire:click="filterData('thisYear')">Tahun Ini</a>
                                 </li>
                                 <li>
                                     <a class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    wire:click="filterAll">All Time</a>
+                                    wire:click="filterData('allTime')">All Time</a>
                                 </li>
                             </ul>
                         </div>
                     </div>
+
                     <div class="w-full h-full">
                         <canvas id="BarangLarisChart"></canvas>
                        
