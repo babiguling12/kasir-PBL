@@ -35,7 +35,7 @@ class SupplierForm extends Form
         'alamat.required' => 'Alamat wajib diisi',
     ];
 
-    public function setSupplier(Supplier $supplier)
+    public function tambahSupplier(Supplier $supplier)
     {
         $this->supplier = $supplier;
         $this->nama = $supplier->nama;
@@ -44,7 +44,7 @@ class SupplierForm extends Form
         $this->keterangan = $supplier->keterangan;
     }
 
-    public function store()
+    public function tambahData()
     {
         $this->validate();
 

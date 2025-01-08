@@ -15,13 +15,13 @@ class SupplierModal extends ModalComponent
     public function mount()
     {
         if($this->supplier && $this->supplier->exists) {
-            $this->form->setSupplier($this->supplier);
+            $this->form->tambahSupplier($this->supplier);
         }
     }
 
     public function save()
     {
-        $this->form->store();
+        $this->form->tambahData();
 
         $this->closeModal();
         $this->dispatch('refresh');
