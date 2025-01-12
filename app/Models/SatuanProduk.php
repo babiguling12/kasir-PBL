@@ -13,9 +13,9 @@ class SatuanProduk extends Model
     protected $table = 'satuan_produk';
     protected $fillable = ['nama_satuan'];
 
-    public function produk(): HasMany {
-        return $this->hasMany(Produk::class, 'satuan_id');
-    }
+    // public function produk(): HasMany {
+    //     return $this->hasMany(Produk::class, 'satuan_id');
+    // }
 
     public static function getDataSatuan($search) {
         return Self::where('nama_satuan', 'like', '%' . $search . '%')->latest()->paginate(5);

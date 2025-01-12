@@ -18,9 +18,9 @@ class Supplier extends Model
         'keterangan',
     ];
 
-    public function stok_masuk(): HasMany {
-        return $this->hasMany(StokMasuk::class);
-    }
+    // public function stok_masuk(): HasMany {
+    //     return $this->hasMany(StokMasuk::class);
+    // }
 
     public static function getDataSupplier($search) {
         return self::where('nama', 'like', '%' . $search . '%')

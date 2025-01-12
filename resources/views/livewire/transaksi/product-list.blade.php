@@ -52,7 +52,7 @@
                     </div>
                     <p class="mb-1 text-xs bg-green-100 text-green-600 p-1 rounded w-fit">{{ $product->barcode }}</p>
                     <div class="text-sm">
-                        Rp {{ number_format($product->harga, 0, ',', '.') }}
+                        @currency($product->harga)
                     </div>
                 </div>
             </div>

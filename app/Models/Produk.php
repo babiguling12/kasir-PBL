@@ -26,9 +26,9 @@ class Produk extends Model
     protected $with = ['satuan', 'kategori'];
 
 
-    public function transaksi_detail(): HasMany {
-        return $this->hasMany(TransaksiDetail::class, 'barcode_id',);
-    }
+    // public function transaksi_detail(): HasMany {
+    //     return $this->hasMany(TransaksiDetail::class, 'barcode_id',);
+    // }
 
     public function satuan(): BelongsTo {
         return $this->belongsTo(SatuanProduk::class);
@@ -38,13 +38,13 @@ class Produk extends Model
         return $this->belongsTo(KategoriProduk::class);
     }
 
-    public function stok_keluar(): HasMany {
-        return $this->hasMany(StokKeluar::class, 'barcode_id');
-    }
+    // public function stok_keluar(): HasMany {
+    //     return $this->hasMany(StokKeluar::class, 'barcode_id');
+    // }
 
-    public function stok_masuk(): HasMany {
-        return $this->hasMany(StokMasuk::class, 'barcode_id');
-    }
+    // public function stok_masuk(): HasMany {
+    //     return $this->hasMany(StokMasuk::class, 'barcode_id');
+    // }
 
     public static function getDataProduk($search) {
         return Self::where('nama_produk', 'like', '%'. $search . '%')
