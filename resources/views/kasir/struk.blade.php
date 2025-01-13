@@ -69,7 +69,7 @@
 </div>
 
 <script>
-    window.onload = function() {
+    window.onload = function print() {
         window.print();
 
         setTimeout(() => {

@@ -69,6 +69,9 @@ class LaporanUtamaTable extends Component
     $stokmasuk = StokMasuk::getStokMasuk($this->startDate,$this->endDate);
     $stokkeluar = StokKeluar::getStokKeluar($this->startDate,$this->endDate);
     $users = Pengguna::all();
+    $number = 0;
+    $number2 = 0;
+    
 
     // Buat objek spreadsheet baru
     $spreadsheet = new Spreadsheet();
@@ -77,7 +80,7 @@ class LaporanUtamaTable extends Component
     // Sheet 1: Laporan Produk
     $sheet->setTitle('Laporan Produk');
     $sheet->setCellValue('A1', 'Laporan Keseluruhan Edipos');
-    $sheet->mergeCells('A1:H1');
+    $sheet->mergeCells('A1:I1');
     $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
 
     // Header tanggal
@@ -87,11 +90,11 @@ class LaporanUtamaTable extends Component
         ? "Dari tanggal $startDate sampai $endDate"
         : ($startDate ? "Dari tanggal $startDate" : "Sampai tanggal $endDate");
     $sheet->setCellValue('A2', $dateHeader);
-    $sheet->mergeCells('A2:H2');
+    $sheet->mergeCells('A2:I2');
     $sheet->getStyle('A2')->getAlignment()->setHorizontal('center');
 
     $data = [
-        ['Produk', 'Barcode', 'Satuan', 'Kategori', 'Stok Masuk', 'Stok Keluar', 'Terjual', 'Revenue']
+        ['No','Produk', 'Barcode', 'Satuan', 'Kategori', 'Stok Masuk', 'Stok Keluar', 'Terjual', 'Revenue']
     ];
 
     // Set header style
@@ -124,8 +127,10 @@ class LaporanUtamaTable extends Component
         $revenue = $produk->harga * $terjual;
         $formattedRevenue = 'Rp ' . number_format($revenue, 0, ',', '.');
         
+
         // Add row data
         $data[] = [
+            $number+=1,
             $produk->nama_produk,
             "'".$produk->barcode,
             $produk->satuan->nama_satuan,
@@ -138,8 +143,8 @@ class LaporanUtamaTable extends Component
     }
     // Add the data to the sheet and apply data row style
     $sheet->fromArray($data, null, 'A4');
-    $sheet->getStyle('A4:H' . (count($data) + 3))->applyFromArray($dataRowStyle);
-    $sheet->getStyle('A4:H4')->applyFromArray($headerStyle);
+    $sheet->getStyle('A4:I' . (count($data) + 3))->applyFromArray($dataRowStyle);
+    $sheet->getStyle('A4:I4')->applyFromArray($headerStyle);
     
 
     // Tambahkan Sheet 2: Laporan Kasir
@@ -148,20 +153,23 @@ class LaporanUtamaTable extends Component
     $sheet2 = $spreadsheet->getActiveSheet();
     $sheet2->setTitle('Laporan Kasir');
     $sheet2->setCellValue('A1', 'Laporan Keseluruhan Edipos');
-    $sheet2->mergeCells('A1:C1');
+    $sheet2->mergeCells('A1:E1');
     $sheet2->getStyle('A1')->getAlignment()->setHorizontal('center');
 
     $sheet2->setCellValue('A2', $dateHeader);
-    $sheet2->mergeCells('A2:C2');
+    $sheet2->mergeCells('A2:E2');
     $sheet2->getStyle('A2')->getAlignment()->setHorizontal('center');
 
     $data2 = [
-        ['Username', 'Nama', 'Total Transaksi'], 
+        ['No','ID','Username', 'Nama', 'Total Transaksi'], 
     ];
 
     foreach($users as $pengguna){
         $tot_trans=$transaksi->where('kasir_id', $pengguna->id)->count();
+        
         $data2[] = [
+            $number2+=1,
+            $pengguna->id,
             $pengguna->username,
             $pengguna->nama,
             $tot_trans
@@ -169,8 +177,8 @@ class LaporanUtamaTable extends Component
     }
 
     $sheet2->fromArray($data2, null, 'A4');
-    $sheet2->getStyle('A4:C' . (count($data2) + 3))->applyFromArray($dataRowStyle);
-    $sheet2->getStyle('A4:C4')->applyFromArray($headerStyle);
+    $sheet2->getStyle('A4:E' . (count($data2) + 3))->applyFromArray($dataRowStyle);
+    $sheet2->getStyle('A4:E4')->applyFromArray($headerStyle);
 
     // Simpan file Excel dan unduh
     $fileName = 'Laporan_Keseluruhan_Edipos.xlsx';
