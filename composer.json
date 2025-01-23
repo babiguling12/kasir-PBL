@@ -15,7 +15,7 @@
         "midtrans/midtrans-php": "^2.6",
         "php-flasher/flasher-laravel": "^2.1",
         "php-flasher/flasher-sweetalert-laravel": "^2.1",
-        "phpoffice/phpspreadsheet": "^3.7",
+        "phpoffice/phpspreadsheet": "^3.8",
         "wire-elements/modal": "^2.0"
     },
     "require-dev": {

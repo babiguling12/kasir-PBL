@@ -107,7 +107,7 @@
                     <div class="flex justify-end mt-6 pr-8">
                         <div class="w-full max-w-md bg-white p-6 text-gray-900 dark:bg-gray-800 dark:text-gray-300">
                             <div class="flex justify-between border-b pb-4 text-base font-semibold">
-                                <span>Total Harga</span>
+                                <span>Sub Total</span>
                                 <span>@currency($histori->total_bayar + $histori->diskon)</span>
                             </div>
                             <div class="flex justify-between border-b py-4 text-base font-semibold">
@@ -115,7 +115,7 @@
                                 <span>@currency($histori->diskon)</span>
                             </div>
                             <div class="flex justify-between border-b py-4 text-base font-semibold">
-                                <span>Total Bayar</span>
+                                <span>Grand Total</span>
                                 <span>@currency($histori->total_bayar)</span>
                             </div>
                             @if ($histori->metode_pembayaran == 'cash')

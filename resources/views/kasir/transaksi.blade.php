@@ -29,7 +29,10 @@
                 window.snap.pay(snapToken, {
                     onSuccess: function(result) {
                         Livewire.dispatch('transaksiDikonfirmasi');
-                    }
+                    },
+                    onPending: function(){    
+                        location.reload();
+                    },
                 });
             })
         });

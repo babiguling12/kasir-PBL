@@ -92,7 +92,7 @@
                     <tr>
                         <td class="px-4 pt-5 font-medium text-center text-xl text-gray-400 whitespace-nowrap dark:text-white"
                             colspan="9" rowspan="10">
-                            Data Stok Belum Ada
+                            Data Stok Keluar Belum Ada
                         </td>
                     </tr>
                 @endforelse

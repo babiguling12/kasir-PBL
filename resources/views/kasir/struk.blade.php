@@ -57,8 +57,8 @@
             <span class="text-right w-2/3"><strong>Tunai :</strong></span>
             <span class="font-bold">@currency($histori->jumlah_uang)</span>
         </div>
-        <div class="flex justify-between text-sm mb-2">
-            <span class="text-right w-2/3"><strong>Total Bayar :</strong></span>
+        <div class="flex justify-between text-sm mb-1">
+            <span class="text-right w-2/3"><strong>Kembalian :</strong></span>
             <span class="font-bold">@currency($histori->jumlah_uang - $histori->total_bayar)</span>
         </div>
     @endif
